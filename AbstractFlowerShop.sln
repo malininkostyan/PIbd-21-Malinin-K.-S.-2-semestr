@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopModel", "..\AbstractFlowerShopModel\AbstractFlowerShopModel.csproj", "{2F7220BA-0666-496A-ACA1-FB2DF6B20EB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceDAL", "..\AbstractFlowerShopService\AbstractFlowerShopServiceDAL.csproj", "{F3862DCD-C926-4444-BE91-5029510D5FE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceImplementList", "..\AbstractFlowerShopServiceImplementList\AbstractFlowerShopServiceImplementList.csproj", "{931627CD-C507-4FA8-82AE-BCDB4F37E023}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopView", "..\AbstractFlowerShopView\AbstractFlowerShopView.csproj", "{0D80CB08-71F5-4DCD-B171-0EC1DF598F9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{2F7220BA-0666-496A-ACA1-FB2DF6B20EB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F7220BA-0666-496A-ACA1-FB2DF6B20EB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F7220BA-0666-496A-ACA1-FB2DF6B20EB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3862DCD-C926-4444-BE91-5029510D5FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3862DCD-C926-4444-BE91-5029510D5FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3862DCD-C926-4444-BE91-5029510D5FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3862DCD-C926-4444-BE91-5029510D5FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{931627CD-C507-4FA8-82AE-BCDB4F37E023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931627CD-C507-4FA8-82AE-BCDB4F37E023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931627CD-C507-4FA8-82AE-BCDB4F37E023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931627CD-C507-4FA8-82AE-BCDB4F37E023}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D80CB08-71F5-4DCD-B171-0EC1DF598F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D80CB08-71F5-4DCD-B171-0EC1DF598F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D80CB08-71F5-4DCD-B171-0EC1DF598F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D80CB08-71F5-4DCD-B171-0EC1DF598F9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
