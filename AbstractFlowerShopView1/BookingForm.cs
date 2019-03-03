@@ -3,7 +3,6 @@ using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Unity;
 
@@ -11,7 +10,7 @@ namespace AbstractFlowerShopView
 {
     public partial class BookingForm : Form
     {
-        [Unity.Dependency]
+        [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly ICustomerService serviceC;
         private readonly IBouquetService serviceP;

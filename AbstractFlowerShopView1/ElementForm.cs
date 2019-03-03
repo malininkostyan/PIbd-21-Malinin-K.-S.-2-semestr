@@ -2,7 +2,6 @@
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Unity;
 
@@ -10,7 +9,7 @@ namespace AbstractFlowerShopView
 {
     public partial class ElementForm : Form
     {
-        [Unity.Dependency]
+        [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }    
         private readonly IElementService service;
