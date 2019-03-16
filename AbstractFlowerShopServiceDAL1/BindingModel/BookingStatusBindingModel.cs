@@ -1,3 +1,4 @@
+namespace AbstractFlowerShopServiceDAL1.BindingModel
 {
     public enum BookingStatusBindingModel
     {
