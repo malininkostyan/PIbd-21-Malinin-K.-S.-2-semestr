@@ -1,4 +1,3 @@
-﻿namespace AbstractFlowerShopServiceDAL.ViewModel
 {
     public enum BookingStatusViewModel
     {
