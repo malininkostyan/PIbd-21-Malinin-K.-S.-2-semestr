@@ -1,6 +1,7 @@
 ﻿using AbstractFlowerShopServiceDAL.BindingModel;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
+using AbstractFlowerShopView1;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -53,6 +54,17 @@ namespace AbstractFlowerShopView
         private void букетыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<BouquetsForm>();
+            form.ShowDialog();
+        }
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<PutOnStorageForm>();
+            form.ShowDialog();
+        }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<StoragesForm>();
             form.ShowDialog();
         }
         private void buttonCreateBooking_Click(object sender, EventArgs e)
@@ -116,5 +128,7 @@ namespace AbstractFlowerShopView
         {
             LoadData();
         }
+
+       
     }
 }

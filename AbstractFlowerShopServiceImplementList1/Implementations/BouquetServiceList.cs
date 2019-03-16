@@ -4,6 +4,7 @@ using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbstractFlowerShopServiceImplementList.Implementations
 {
@@ -16,235 +17,146 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
         }
         public List<BouquetViewModel> ListGet()
         {
-            List<BouquetViewModel> result = new List<BouquetViewModel>();
-            for (int i = 0; i < origin.Bouquets.Count; ++i)
+            List<BouquetViewModel> result = origin.Bouquets.Select(rec => new BouquetViewModel
             {
-            List<BouquetElementViewModel> bouquetElements = new List<BouquetElementViewModel>();
-                for (int j = 0; j < origin.BouquetElements.Count; ++j)
+                Id = rec.Id,
+                BouquetName = rec.BouquetName,
+                Cost = rec.Cost,
+                BouquetElements = origin.BouquetElements
+                .Where(recPC => recPC.BouquetId == rec.Id)
+                .Select(recPC => new BouquetElementViewModel
                 {
-                    if (origin.BouquetElements[j].BouquetId == origin.Bouquets[i].Id)
-                    {
-                        string elementName = string.Empty;
-                        for (int k = 0; k < origin.Elements.Count; ++k)
-                        {
-                            if (origin.BouquetElements[j].ElementId ==
-                           origin.Elements[k].Id)
-                            {
-                                elementName = origin.Elements[k].ElementName;
-                                break;
-                            }
-                        }
-                        bouquetElements.Add(new BouquetElementViewModel
-                        {
-                            Id = origin.BouquetElements[j].Id,
-                            BouquetId = origin.BouquetElements[j].BouquetId,
-                            ElementId = origin.BouquetElements[j].ElementId,
-                            ElementName = elementName,
-                            Amount = origin.BouquetElements[j].Amount
-                        });
-                    }
-                }
-                result.Add(new BouquetViewModel
-                {
-                    Id = origin.Bouquets[i].Id,
-                    BouquetName = origin.Bouquets[i].BouquetName,
-                    Cost = origin.Bouquets[i].Cost,
-                    BouquetElements = bouquetElements
-                });
-            }
+                    Id = recPC.Id,
+                    BouquetId = recPC.BouquetId,
+                    ElementId = recPC.ElementId,
+                    ElementName = origin.Elements.FirstOrDefault(recC =>
+                    recC.Id == recPC.ElementId)?.ElementName,
+                    Amount = recPC.Amount
+                }) .ToList()
+            }) .ToList();
             return result;
         }
         public BouquetViewModel ElementGet(int id)
         {
-            for (int i = 0; i < origin.Bouquets.Count; ++i)
+            Bouquet component = origin.Bouquets.FirstOrDefault(rec => rec.Id == id);
+            if (component != null)
             {
-            List<BouquetElementViewModel> bouquetElements = new List<BouquetElementViewModel>();
-                for (int j = 0; j < origin.BouquetElements.Count; ++j)
+                return new BouquetViewModel
                 {
-                    if (origin.BouquetElements[j].BouquetId == origin.Bouquets[i].Id)
-                    {
-                        string elementName = string.Empty;
-                        for (int k = 0; k < origin.Elements.Count; ++k)
+                    Id = component.Id,
+                    BouquetName = component.BouquetName,
+                    Cost = component.Cost,
+                    BouquetElements = origin.BouquetElements
+                        .Where(recPC => recPC.BouquetId == component.Id)
+                        .Select(recPC => new BouquetElementViewModel
                         {
-                            if (origin.BouquetElements[j].ElementId ==
-                           origin.Elements[k].Id)
-                            {
-                                elementName = origin.Elements[k].ElementName;
-                                break;
-                            }
-                        }
-                        bouquetElements.Add(new BouquetElementViewModel
-                        {
-                            Id = origin.BouquetElements[j].Id,
-                            BouquetId = origin.BouquetElements[j].BouquetId,
-                            ElementId = origin.BouquetElements[j].ElementId,
-                            ElementName = elementName,
-                            Amount = origin.BouquetElements[j].Amount
-                        });
-                    }
-                }
-                if (origin.Bouquets[i].Id == id)
-                {
-                    return new BouquetViewModel
-                    {
-                        Id = origin.Bouquets[i].Id,
-                        BouquetName = origin.Bouquets[i].BouquetName,
-                        Cost = origin.Bouquets[i].Cost,
-                        BouquetElements = bouquetElements
-                    };
-                }
+                            Id = recPC.Id,
+                            BouquetId = recPC.BouquetId,
+                            ElementId = recPC.ElementId,
+                            ElementName = origin.Elements.FirstOrDefault(recC =>
+                            recC.Id == recPC.ElementId)?.ElementName,
+                            Amount = recPC.Amount
+                        }).ToList()
+                };
             }
-            throw new Exception("Элемент не найден");
+                throw new Exception("Элемент не найден");
         }
         public void AddElement(BouquetBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < origin.Bouquets.Count; ++i)
+            Bouquet component = origin.Bouquets.FirstOrDefault(rec => rec.BouquetName == model.BouquetName);
+            if (component != null)
             {
-                if (origin.Bouquets[i].Id > maxId)
-                {
-                    maxId = origin.Bouquets[i].Id;
-                }
-                if (origin.Bouquets[i].BouquetName == model.BouquetName)
-                {
-                    throw new Exception("Уже есть изделие с таким названием");
-                }
+                throw new Exception("Уже есть изделие с таким названием");
             }
+            int maxId = origin.Bouquets.Count > 0 ? origin.Bouquets.Max(rec => rec.Id) : 0;
             origin.Bouquets.Add(new Bouquet
             {
                 Id = maxId + 1,
                 BouquetName = model.BouquetName,
                 Cost = model.Cost
             });
-            int maxPCId = 0;
-            for (int i = 0; i < origin.BouquetElements.Count; ++i)
-            {
-                if (origin.BouquetElements[i].Id > maxPCId)
+            int maxPCId = origin.BouquetElements.Count > 0 ?
+            origin.BouquetElements.Max(rec => rec.Id) : 0;
+            var groupElements = model.BouquetElements
+                .GroupBy(rec => rec.ElementId)
+                .Select(rec => new
                 {
-                    maxPCId = origin.BouquetElements[i].Id;
-                }
-            }
-            for (int i = 0; i < model.BouquetElements.Count; ++i)
-            {
-                for (int j = 1; j < model.BouquetElements.Count; ++j)
-                {
-                    if (model.BouquetElements[i].ElementId ==
-                    model.BouquetElements[j].ElementId)
-                    {
-                        model.BouquetElements[i].Amount +=
-                        model.BouquetElements[j].Amount;
-                        model.BouquetElements.RemoveAt(j--);
-                    }
-                }
-            }
-            for (int i = 0; i < model.BouquetElements.Count; ++i)
+                    ElementId = rec.Key,
+                    Count = rec.Sum(r => r.Amount)
+                });
+                // добавляем компоненты
+            foreach (var groupElement in groupElements)
             {
                 origin.BouquetElements.Add(new BouquetElement
                 {
                     Id = ++maxPCId,
                     BouquetId = maxId + 1,
-                    ElementId = model.BouquetElements[i].ElementId,
-                    Amount = model.BouquetElements[i].Amount
+                    ElementId = groupElement.ElementId,
+                    Amount = groupElement.Count
                 });
             }
         }
         public void UpdateElement(BouquetBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < origin.Bouquets.Count; ++i)
+            Bouquet component = origin.Bouquets.FirstOrDefault(rec => rec.BouquetName == model.BouquetName && rec.Id != model.Id);
+            if (component != null)
             {
-                if (origin.Bouquets[i].Id == model.Id)
-                {
-                    index = i;
-                }
-                if (origin.Bouquets[i].BouquetName == model.BouquetName &&
-                origin.Bouquets[i].Id != model.Id)
-                {
-                    throw new Exception("Уже есть изделие с таким названием");
-                }
+                throw new Exception("Уже есть изделие с таким названием");
             }
-            if (index == -1)
+            component = origin.Bouquets.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            origin.Bouquets[index].BouquetName = model.BouquetName;
-            origin.Bouquets[index].Cost = model.Cost;
-            int maxPCId = 0;
-            for (int i = 0; i < origin.BouquetElements.Count; ++i)
+            component.BouquetName = model.BouquetName;
+            component.Cost = model.Cost;
+            int maxPCId = origin.BouquetElements.Count > 0 ? origin.BouquetElements.Max(rec => rec.Id) : 0;
+            var compIds = model.BouquetElements.Select(rec => rec.ElementId).Distinct();
+            var updateElements = origin.BouquetElements.Where(rec => rec.BouquetId == model.Id && compIds.Contains(rec.ElementId));
+            foreach (var updateElement in updateElements)
             {
-                if (origin.BouquetElements[i].Id > maxPCId)
-                {
-                    maxPCId = origin.BouquetElements[i].Id;
-                }
+                updateElement.Amount = model.BouquetElements.FirstOrDefault(rec => rec.Id == updateElement.Id).Amount;
             }
-            for (int i = 0; i < origin.BouquetElements.Count; ++i)
+            origin.BouquetElements.RemoveAll(rec => rec.BouquetId == model.Id && !compIds.Contains(rec.ElementId));
+            var groupElements = model.BouquetElements
+            .Where(rec => rec.Id == 0)
+            .GroupBy(rec => rec.ElementId)
+            .Select(rec => new
             {
-                if (origin.BouquetElements[i].BouquetId == model.Id)
+                ElementId = rec.Key,
+                Count = rec.Sum(r => r.Amount)
+            });
+            foreach (var groupElement in groupElements)
+            {
+                BouquetElement componentPC = origin.BouquetElements.FirstOrDefault(rec => rec.BouquetId == model.Id && rec.ElementId == groupElement.ElementId);
+                if (componentPC != null)
                 {
-                    bool flag = true;
-                    for (int j = 0; j < model.BouquetElements.Count; ++j)
-                    {
-                        if (origin.BouquetElements[i].Id == model.BouquetElements[j].Id)
-                        {
-                            origin.BouquetElements[i].Amount = model.BouquetElements[j].Amount;
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if (flag)
-                    {
-                        origin.BouquetElements.RemoveAt(i--);
-                    }
+                    componentPC.Amount += groupElement.Count;
                 }
-            }
-            for (int i = 0; i < model.BouquetElements.Count; ++i)
-            {
-                if (model.BouquetElements[i].Id == 0)
+                else
                 {
-                    for (int j = 0; j < origin.BouquetElements.Count; ++j)
+                    origin.BouquetElements.Add(new BouquetElement
                     {
-                        if (origin.BouquetElements[j].BouquetId == model.Id &&
-                        origin.BouquetElements[j].ElementId ==
-                       model.BouquetElements[i].ElementId)
-                        {
-                            origin.BouquetElements[j].Amount +=
-                           model.BouquetElements[i].Amount;
-                            model.BouquetElements[i].Id =
-                           origin.BouquetElements[j].Id;
-                            break;
-                        }
-                    }
-                    if (model.BouquetElements[i].Id == 0)
-                    {
-                        origin.BouquetElements.Add(new BouquetElement
-                        {
-                            Id = ++maxPCId,
-                            BouquetId = model.Id,
-                            ElementId = model.BouquetElements[i].ElementId,
-                            Amount = model.BouquetElements[i].Amount
-                        });
-                    }
+                        Id = ++maxPCId,
+                        BouquetId = model.Id,
+                        ElementId = groupElement.ElementId,
+                        Amount = groupElement.Count
+                    });
                 }
             }
         }
         public void DeleteElement(int id)
         {
-            for (int i = 0; i < origin.BouquetElements.Count; ++i)
+            Bouquet component = origin.Bouquets.FirstOrDefault(rec => rec.Id == id);
+            if (component != null)
             {
-                if (origin.BouquetElements[i].BouquetId == id)
-                {
-                    origin.BouquetElements.RemoveAt(i--);
-                }
+                origin.BouquetElements.RemoveAll(rec => rec.BouquetId == id);
+                origin.Bouquets.Remove(component);
             }
-            for (int i = 0; i < origin.Bouquets.Count; ++i)
+            else
             {
-                if (origin.Bouquets[i].Id == id)
-                {
-                    origin.Bouquets.RemoveAt(i);
-                    return;
-                }
+                throw new Exception("Элемент не найден");
             }
-            throw new Exception("Элемент не найден");
         }
     }
 }

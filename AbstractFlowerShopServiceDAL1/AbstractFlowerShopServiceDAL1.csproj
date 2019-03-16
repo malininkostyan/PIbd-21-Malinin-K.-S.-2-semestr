@@ -54,11 +54,14 @@
     <Compile Include="BindingModel\BouquetElementBindingModel.cs" />
     <Compile Include="BindingModel\CustomerBindingModel.cs" />
     <Compile Include="BindingModel\ElementBindingModel.cs" />
+    <Compile Include="BindingModel\StorageBindingModel.cs" />
+    <Compile Include="BindingModel\StorageElementBindingModel.cs" />
     <Compile Include="Interfaces\IBouquetElementService.cs" />
     <Compile Include="Interfaces\IBouquetService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\IElementService.cs" />
     <Compile Include="Interfaces\IServiceMain.cs" />
+    <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BookingStatusViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel.cs" />
@@ -66,6 +69,8 @@
     <Compile Include="ViewModel\BouquetViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
+    <Compile Include="ViewModel\StorageElementViewModel.cs" />
+    <Compile Include="ViewModel\StorageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel1.csproj">
