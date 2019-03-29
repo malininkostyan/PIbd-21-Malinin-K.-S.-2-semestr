@@ -4,6 +4,7 @@ using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbstractFlowerShopServiceImplementList.Implementations
 {
@@ -16,46 +17,34 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
         }
         public List<ElementViewModel> ListGet()
         {
-            List<ElementViewModel> result = new List<ElementViewModel>();
-            for (int i = 0; i < origin.Elements.Count; ++i)
+            List<ElementViewModel> result = origin.Elements.Select(rec => new ElementViewModel
             {
-                result.Add(new ElementViewModel
-                {
-                    Id = origin.Elements[i].Id,
-                    ElementName = origin.Elements[i].ElementName
-                });
-            }
+                Id = rec.Id,
+                ElementName = rec.ElementName
+            }) .ToList();
             return result;
         }
         public ElementViewModel ElementGet(int id)
         {
-            for (int i = 0; i < origin.Elements.Count; ++i)
+            Element component = origin.Elements.FirstOrDefault(rec => rec.Id == id);
+            if (component != null)
             {
-                if (origin.Elements[i].Id == id)
+                return new ElementViewModel
                 {
-                    return new ElementViewModel
-                    {
-                        Id = origin.Elements[i].Id,
-                        ElementName = origin.Elements[i].ElementName
-                    };
-                }
+                    Id = component.Id,
+                    ElementName = component.ElementName
+                };
             }
-            throw new Exception("Элемент не найден");
+                throw new Exception("Элемент не найден");
         }
         public void AddElement(ElementBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < origin.Elements.Count; ++i)
+            Element component = origin.Elements.FirstOrDefault(rec => rec.ElementName == model.ElementName);
+            if (component != null)
             {
-                if (origin.Elements[i].Id > maxId)
-                {
-                    maxId = origin.Elements[i].Id;
-                }
-                if (origin.Elements[i].ElementName == model.ElementName)
-                {
-                    throw new Exception("Уже есть компонент с таким названием");
-                }
+                throw new Exception("Уже есть компонент с таким названием");
             }
+            int maxId = origin.Elements.Count > 0 ? origin.Elements.Max(rec => rec.Id) : 0;
             origin.Elements.Add(new Element
             {
                 Id = maxId + 1,
@@ -64,37 +53,29 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
         }
         public void UpdateElement(ElementBindingModel model)
         {
-            int index = -1;
-
-            for (int i = 0; i < origin.Elements.Count; ++i)
+            Element component = origin.Elements.FirstOrDefault(rec => rec.ElementName == model.ElementName && rec.Id != model.Id);
+            if (component != null)
             {
-                if (origin.Elements[i].Id == model.Id)
-                {
-                    index = i;
-                }
-                if (origin.Elements[i].ElementName == model.ElementName &&
-                origin.Elements[i].Id != model.Id)
-                {
-                    throw new Exception("Уже есть компонент с таким названием");
-                }
+                throw new Exception("Уже есть компонент с таким названием");
             }
-            if (index == -1)
+            component = origin.Elements.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            origin.Elements[index].ElementName = model.ElementName;
+            component.ElementName = model.ElementName;
         }
         public void DeleteElement(int id)
         {
-            for (int i = 0; i < origin.Elements.Count; ++i)
+            Element component = origin.Elements.FirstOrDefault(rec => rec.Id == id);
+            if (component != null)
             {
-                if (origin.Elements[i].Id == id)
-                {
-                    origin.Elements.RemoveAt(i);
-                    return;
-                }
+                origin.Elements.Remove(component);
             }
-            throw new Exception("Элемент не найден");
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using AbstractFlowerShopModel;
+using AbstractFlowerShopModel1;
 using AbstractFlowerShopServiceDAL.BindingModel;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
+using AbstractFlowerShopServiceDAL1.BindingModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbstractFlowerShopServiceImplementList.Implementations
 {
@@ -16,53 +19,26 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
         }
         public List<BookingViewModel> ListGet()
         {
-            List<BookingViewModel> result = new List<BookingViewModel>();
-            for (int i = 0; i < origin.Bookings.Count; ++i)
+            List<BookingViewModel> result = origin.Bookings.Select(rec => new BookingViewModel
             {
-                string customerFIO = string.Empty;
-                for (int j = 0; j < origin.Customers.Count; ++j)
-                {
-                    if (origin.Customers[j].Id == origin.Bookings[i].CustomerId)
-                    {
-                        customerFIO = origin.Customers[j].CustomerFIO;
-                        break;
-                    }
-                }
-                string bouquetName = string.Empty;
-                for (int j = 0; j < origin.Bouquets.Count; ++j)
-                {
-                    if (origin.Bouquets[j].Id == origin.Bookings[i].BouquetId)
-                    {
-                        bouquetName = origin.Bouquets[j].BouquetName;
-                        break;
-                    }
-                }
-                result.Add(new BookingViewModel
-                {
-                    Id = origin.Bookings[i].Id,
-                    CustomerId = origin.Bookings[i].CustomerId,
-                    CustomerFIO = customerFIO,
-                    BouquetId = origin.Bookings[i].BouquetId,
-                    BouquetName = bouquetName,
-                    Amount = origin.Bookings[i].Amount,
-                    Total = origin.Bookings[i].Total,
-                    CreateDate = origin.Bookings[i].CreateDate.ToLongDateString(),
-                    ImplementDate = origin.Bookings[i].ImplementDate?.ToLongDateString(),
-                    Status = origin.Bookings[i].Status.ToString()
-                });
-            }
+                Id = rec.Id,
+                CustomerId = rec.CustomerId,
+                BouquetId = rec.BouquetId,
+                CreateDate = rec.CreateDate.ToLongDateString(),
+                ImplementDate = rec.ImplementDate?.ToLongDateString(),
+                Status = rec.Status.ToString(),
+                Amount = rec.Amount,
+                Total = rec.Total,
+                CustomerFIO = origin.Customers.FirstOrDefault(recC => recC.Id ==
+                rec.CustomerId)?.CustomerFIO,
+                BouquetName = origin.Bouquets.FirstOrDefault(recP => recP.Id ==
+                rec.BouquetId)?.BouquetName,
+            }).ToList();
             return result;
         }
         public void CreateBooking(BookingBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < origin.Bookings.Count; ++i)
-            {
-                if (origin.Bookings[i].Id > maxId)
-                {
-                    maxId = origin.Customers[i].Id;
-                }
-            }
+            int maxId = origin.Bookings.Count > 0 ? origin.Bookings.Max(rec => rec.Id) : 0;
             origin.Bookings.Add(new Booking
             {
                 Id = maxId + 1,
@@ -76,67 +52,96 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
         }
         public void TakeBookingInWork(BookingBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < origin.Bookings.Count; ++i)
-            {
-                if (origin.Bookings[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Booking component = origin.Bookings.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (origin.Bookings[index].Status != BookingStatus.Принят)
+            if (component.Status != BookingStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            origin.Bookings[index].ImplementDate = DateTime.Now;
-            origin.Bookings[index].Status = BookingStatus.Выполняется;
-        }
-        public void FinishBooking(BookingBindingModel model)
-        {
-            int index = -1;
-            for (int i = 0; i < origin.Bookings.Count; ++i)
+            var bouquetElements = origin.BouquetElements.Where(rec => rec.BouquetId == component.BouquetId);
+            foreach (var bouquetElement in bouquetElements)
             {
-                if (origin.Customers[i].Id == model.Id)
+                int amountOnStorages = origin.StorageElements
+                .Where(rec => rec.ElementId == bouquetElement.ElementId)
+                .Sum(rec => rec.Amount);
+                if (amountOnStorages < bouquetElement.Amount * component.Amount)
                 {
-                    index = i;
-                    break;
+                    var componentName = origin.Elements.FirstOrDefault(rec => rec.Id ==
+                    bouquetElement.ElementId);
+                    throw new Exception("Не достаточно компонента " +
+                    componentName?.ElementName + " требуется " + (bouquetElement.Amount * component.Amount) +
+                   ", в наличии " + amountOnStorages);
                 }
             }
-            if (index == -1)
+            foreach (var bouquetElement in bouquetElements)
+            {
+                int amountOnStorages = bouquetElement.Amount * component.Amount;
+                var storageElements = origin.StorageElements.Where(rec => rec.ElementId == bouquetElement.ElementId);
+                foreach (var storageElement in storageElements)
+                {
+                    if (storageElement.Amount >= amountOnStorages)
+                    {
+                        storageElement.Amount -= amountOnStorages;
+                        break;
+                    }
+                    else
+                    {
+                        amountOnStorages -= storageElement.Amount;
+                        storageElement.Amount = 0;
+                    }
+                }
+            }
+            component.ImplementDate = DateTime.Now;
+            component.Status = BookingStatus.Выполняется;
+        }
+        public void FinishBooking(BookingBindingModel model)
+        {
+            Booking component = origin.Bookings.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (origin.Bookings[index].Status != BookingStatus.Выполняется)
+            if (component.Status != BookingStatus.Выполняется)
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
             }
-            origin.Bookings[index].Status = BookingStatus.Готов;
+            component.Status = BookingStatus.Готов;
         }
         public void PayBooking(BookingBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < origin.Bookings.Count; ++i)
-            {
-                if (origin.Customers[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Booking component = origin.Bookings.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (origin.Bookings[index].Status != BookingStatus.Готов)
+            if (component.Status != BookingStatus.Готов)
             {
                 throw new Exception("Заказ не в статусе \"Готов\"");
             }
-            origin.Bookings[index].Status = BookingStatus.Оплачен;
+            component.Status = BookingStatus.Оплачен;
+        }
+        public void PutElementOnStorage(StorageElementBindingModel model)
+        {
+            StorageElement component = origin.StorageElements.FirstOrDefault(rec => rec.StorageId == model.StorageId && rec.ElementId == model.ElementId);
+            if (component != null)
+            {
+                component.Amount += model.Amount;
+            }
+            else
+            {
+                int maxId = origin.StorageElements.Count > 0 ?
+                origin.StorageElements.Max(rec => rec.Id) : 0;
+                origin.StorageElements.Add(new StorageElement
+                {
+                    Id = ++maxId,
+                    StorageId = model.StorageId,
+                    ElementId = model.ElementId,
+                    Amount = model.Amount
+                });
+            }
         }
     }
 }

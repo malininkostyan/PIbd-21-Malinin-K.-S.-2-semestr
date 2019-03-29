@@ -4,6 +4,8 @@ using AbstractFlowerShopServiceImplementList.Implementations;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using Unity;
 using Unity.Lifetime;
+using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceImplementList1.Implementations;
 
 namespace AbstractFlowerShopView
 {
@@ -27,6 +29,8 @@ namespace AbstractFlowerShopView
             currentContainer.RegisterType<IBouquetService, BouquetServiceList>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IServiceMain, ServiceMainList>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStorageService, StorageServiceList>(new
             HierarchicalLifetimeManager());
             return currentContainer;
         }

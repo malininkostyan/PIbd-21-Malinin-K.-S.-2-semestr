@@ -52,6 +52,7 @@
     <Compile Include="Implementations\CustomerServiceList.cs" />
     <Compile Include="Implementations\ElementServiceList.cs" />
     <Compile Include="Implementations\ServiceMainList.cs" />
+    <Compile Include="Implementations\StorageServiceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleDataList.cs" />
   </ItemGroup>
