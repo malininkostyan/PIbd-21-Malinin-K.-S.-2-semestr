@@ -1,4 +1,4 @@
-﻿namespace AbstractFlowerShopServiceDAL.ViewModel
+﻿namespace AbstractFlowerShopServiceDAL1.ViewModel
 {
     public class BouquetElementViewModel
     {

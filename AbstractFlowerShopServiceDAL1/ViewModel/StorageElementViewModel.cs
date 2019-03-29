@@ -11,5 +11,6 @@ namespace AbstractFlowerShopServiceDAL1.ViewModel
         public string ElementName { get; set; } 
         [DisplayName("Количество")]
         public int Amount { get; set; }
-    }
+    }
+
 }

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E700F092-3B68-4BC0-AF76-C8563A2D8E84}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AbstractFlowerShopServiceImplementDataBase</RootNamespace>
+    <AssemblyName>AbstractFlowerShopServiceImplementDataBase</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractContextDb.cs" />
+    <Compile Include="Implementations\BouquetServiceDB.cs" />
+    <Compile Include="Implementations\CustomerServiceDB.cs" />
+    <Compile Include="Implementations\ElementServiceDB.cs" />
+    <Compile Include="Implementations\StorageServiceDB.cs" />
+    <Compile Include="Implementations\ServiceMainDB.cs" />
+    <Compile Include="Migrations\201903160845132_FirstMigration.cs" />
+    <Compile Include="Migrations\201903160845132_FirstMigration.Designer.cs">
+      <DependentUpon>201903160845132_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903161949376_SecondMigration.cs" />
+    <Compile Include="Migrations\201903161949376_SecondMigration.Designer.cs">
+      <DependentUpon>201903161949376_SecondMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903291915239_ThirdMigration.cs" />
+    <Compile Include="Migrations\201903291915239_ThirdMigration.Designer.cs">
+      <DependentUpon>201903291915239_ThirdMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel1.csproj">
+      <Project>{15439c61-a4dc-4ba2-b5d8-e43bb79d0618}</Project>
+      <Name>AbstractFlowerShopModel1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL1.csproj">
+      <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
+      <Name>AbstractFlowerShopServiceDAL1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903160845132_FirstMigration.resx">
+      <DependentUpon>201903160845132_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903161949376_SecondMigration.resx">
+      <DependentUpon>201903161949376_SecondMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903291915239_ThirdMigration.resx">
+      <DependentUpon>201903291915239_ThirdMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

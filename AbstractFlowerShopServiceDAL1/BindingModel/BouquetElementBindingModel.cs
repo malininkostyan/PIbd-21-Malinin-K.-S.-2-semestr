@@ -1,4 +1,4 @@
-﻿namespace AbstractFlowerShopServiceDAL.BindingModel
+﻿namespace AbstractFlowerShopServiceDAL1.BindingModel
 {
     public class BouquetElementBindingModel
     {

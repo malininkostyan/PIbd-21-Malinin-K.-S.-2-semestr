@@ -1,14 +1,12 @@
-﻿using AbstractFlowerShopModel;
-using AbstractFlowerShopModel1;
-using AbstractFlowerShopServiceDAL.BindingModel;
-using AbstractFlowerShopServiceDAL.Interfaces;
-using AbstractFlowerShopServiceDAL.ViewModel;
+﻿using AbstractFlowerShopModel1;
+using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using AbstractFlowerShopServiceDAL1.BindingModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AbstractFlowerShopServiceImplementList.Implementations
+namespace AbstractFlowerShopServiceImplementList1.Implementations
 {
     public class ServiceMainList : IServiceMain
     {
@@ -96,7 +94,8 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
             }
             component.ImplementDate = DateTime.Now;
             component.Status = BookingStatus.Выполняется;
-        }
+        }
+
         public void FinishBooking(BookingBindingModel model)
         {
             Booking component = origin.Bookings.FirstOrDefault(rec => rec.Id == model.Id);

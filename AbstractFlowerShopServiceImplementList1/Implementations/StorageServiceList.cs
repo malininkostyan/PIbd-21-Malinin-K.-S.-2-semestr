@@ -2,7 +2,6 @@
 using AbstractFlowerShopServiceDAL1.BindingModel;
 using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
-using AbstractFlowerShopServiceImplementList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
