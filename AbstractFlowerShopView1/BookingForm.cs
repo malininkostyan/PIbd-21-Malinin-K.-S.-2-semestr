@@ -59,7 +59,7 @@ namespace AbstractFlowerShopView1
                     int id = Convert.ToInt32(comboBoxBouquet.SelectedValue);
                     BouquetViewModel product = serviceP.ElementGet(id);
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxTotal.Text = (count * product.Cost).ToString();
+                    textBoxTotal.Text = (count * (Int32)product.Cost).ToString();
                 }
                 catch (Exception ex)
                 {
