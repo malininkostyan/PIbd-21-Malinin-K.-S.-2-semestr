@@ -1,12 +1,12 @@
-﻿using AbstractFlowerShopServiceDAL.BindingModel;
-using AbstractFlowerShopServiceDAL.Interfaces;
-using AbstractFlowerShopServiceDAL.ViewModel;
+﻿using AbstractFlowerShopServiceDAL1.BindingModel;
+using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractFlowerShopView
+namespace AbstractFlowerShopView1
 {
     public partial class BookingForm : Form
     {
@@ -59,7 +59,7 @@ namespace AbstractFlowerShopView
                     int id = Convert.ToInt32(comboBoxBouquet.SelectedValue);
                     BouquetViewModel product = serviceP.ElementGet(id);
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxTotal.Text = (count * product.Cost).ToString();
+                    textBoxTotal.Text = (count * (Int32)product.Cost).ToString();
                 }
                 catch (Exception ex)
                 {

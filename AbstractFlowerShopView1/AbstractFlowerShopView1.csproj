@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -168,6 +175,7 @@
     <EmbeddedResource Include="StoregesForm.resx">
       <DependentUpon>StoregesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -187,6 +195,10 @@
     <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL1.csproj">
       <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
       <Name>AbstractFlowerShopServiceDAL1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbstractFlowerShopServiceImplementDataBase\AbstractFlowerShopServiceImplementDataBase.csproj">
+      <Project>{e700f092-3b68-4bc0-af76-c8563a2d8e84}</Project>
+      <Name>AbstractFlowerShopServiceImplementDataBase</Name>
     </ProjectReference>
     <ProjectReference Include="..\AbstractFlowerShopServiceImplementList1\AbstractFlowerShopServiceImplementList1.csproj">
       <Project>{62fcc0b2-2c45-4efb-bb93-cf0d0a0db6e1}</Project>

@@ -1,12 +1,12 @@
-﻿using AbstractFlowerShopModel;
-using AbstractFlowerShopServiceDAL.BindingModel;
-using AbstractFlowerShopServiceDAL.Interfaces;
-using AbstractFlowerShopServiceDAL.ViewModel;
+﻿using AbstractFlowerShopModel1;
+using AbstractFlowerShopServiceDAL1.BindingModel;
+using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AbstractFlowerShopServiceImplementList.Implementations
+namespace AbstractFlowerShopServiceImplementList1.Implementations
 {
     public class BouquetServiceList : IBouquetService
     {
@@ -84,7 +84,7 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
                     ElementId = rec.Key,
                     Count = rec.Sum(r => r.Amount)
                 });
-                // добавляем компоненты
+              
             foreach (var groupElement in groupElements)
             {
                 origin.BouquetElements.Add(new BouquetElement
