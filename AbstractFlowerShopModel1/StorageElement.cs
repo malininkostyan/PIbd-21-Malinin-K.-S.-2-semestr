@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AbstractFlowerShopModel1
+﻿namespace AbstractFlowerShopModel1
 {
     public class StorageElement
     {
