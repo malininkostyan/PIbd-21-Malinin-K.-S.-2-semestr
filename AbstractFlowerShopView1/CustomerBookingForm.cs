@@ -82,7 +82,7 @@ namespace AbstractFlowerShopView1
         private void CustomerBookingForm_Load(object sender, EventArgs e)
         {
 
-            this.reportViewer.RefreshReport();
+            reportViewer.RefreshReport();
         }
     }
 }
