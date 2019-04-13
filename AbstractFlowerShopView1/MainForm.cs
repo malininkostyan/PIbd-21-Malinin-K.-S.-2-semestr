@@ -12,11 +12,13 @@ namespace AbstractFlowerShopView1
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
+        private ILogService logService;
         private readonly IServiceMain service;
-        public MainForm(IServiceMain service)
+        public MainForm(IServiceMain service, ILogService logService)
         {
             InitializeComponent();
             this.service = service;
+            this.logService = logService;
         }
         private void LoadData()
         {
@@ -128,6 +130,39 @@ namespace AbstractFlowerShopView1
             LoadData();
         }
 
-       
+        private void прайсИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "doc|*.doc|docx|*.docx"
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    logService.SaveBouquetPrice(new LogBindingModel
+                    {
+                        FileName = sfd.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<StoragesLoadForm>();
+            form.ShowDialog();
+        }
+        private void заказыКлиентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<CustomerBookingForm>();
+            form.ShowDialog();
+        }
     }
 }

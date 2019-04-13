@@ -34,6 +34,8 @@ namespace AbstractFlowerShopView1
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IServiceMain, ServiceMainDB>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ILogService, LogServiceDB>(new
+            HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
