@@ -16,7 +16,7 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                List<CustomerViewModel> listC = serviceC.ListGet();
+                List<CustomerViewModel> listC = APICustomer.GetRequest<List<CustomerViewModel>>("api/Customer/ListGet");
                 if (listC != null)
                 {
                     comboBoxCustomer.DisplayMember = "CustomerFIO";
@@ -24,7 +24,7 @@ namespace AbstractFlowerShopView1
                     comboBoxCustomer.DataSource = listC;
                     comboBoxCustomer.SelectedItem = null;
                 }
-                List<BouquetViewModel> listP = serviceP.ListGet();
+                List<BouquetViewModel> listP = APICustomer.GetRequest<List<BouquetViewModel>>("api/Bouquet/ListGet");
                 if (listP != null)
                 {
                     comboBoxBouquet.DisplayMember = "BouquetName";
@@ -47,9 +47,9 @@ namespace AbstractFlowerShopView1
                 try
                 {
                     int id = Convert.ToInt32(comboBoxBouquet.SelectedValue);
-                    BouquetViewModel product = serviceP.ElementGet(id);
+                    //BouquetViewModel product = APICustomer.GetRequest<BouquetViewModel>("api/BouquetElement/ListGet/" + id);
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxTotal.Text = (count * (Int32)product.Cost).ToString();
+                    textBoxTotal.Text = (count * (int)product.Cost).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -88,8 +88,8 @@ namespace AbstractFlowerShopView1
             }
             try
             {
-                serviceM.CreateBooking(new BookingBindingModel
-                {
+               APICustomer.PostRequest<BookingBindingModel, bool>("api/CreateBooking/SaveElement", new BookingBindingModel
+               {
                     CustomerId = Convert.ToInt32(comboBoxCustomer.SelectedValue),
                     BouquetId = Convert.ToInt32(comboBoxBouquet.SelectedValue),
                     Amount = Convert.ToInt32(textBoxCount.Text),

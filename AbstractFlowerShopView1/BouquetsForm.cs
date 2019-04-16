@@ -1,4 +1,4 @@
-﻿using AbstractFlowerShopServiceDAL1.Interfaces;
+﻿using AbstractFlowerShopServiceDAL1.BindingModel;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -7,13 +7,9 @@ namespace AbstractFlowerShopView1
 {
     public partial class BouquetsForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IBouquetService service;
-        public BouquetsForm(IBouquetService service)
+        public BouquetsForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormBouquets_Load(object sender, EventArgs e)
         {
@@ -23,7 +19,7 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                List<BouquetViewModel> list = service.ListGet();
+                List<BouquetViewModel> list = APICustomer.GetRequest<List<BouquetViewModel>>("api/Bouquet/ListGet");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -40,7 +36,7 @@ namespace AbstractFlowerShopView1
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<BouquetForm>();
+            var form = new BouquetForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -50,8 +46,10 @@ namespace AbstractFlowerShopView1
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<BouquetForm>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                var form = new BouquetForm
+                {
+                    Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value)
+                };
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
@@ -68,7 +66,7 @@ namespace AbstractFlowerShopView1
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DeleteElement(id);
+                        APICustomer.PostRequest<BouquetBindingModel, bool>("api/Bouquet/DeleteElement", new BouquetBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

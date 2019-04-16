@@ -42,12 +42,11 @@ namespace AbstracFlowertShopView1
             {
                 if (id.HasValue)
                 {
-                    APICustomer.PostRequest<CustomerBindingModel,
-                   bool>("api/Customer/UpdateElement", new CustomerBindingModel
-                   {
+                    APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/UpdateElement", new CustomerBindingModel
+                    {
                        Id = id.Value,
                        CustomerFIO = textBoxFIO.Text
-                   });
+                    });
                 }
                 else
                 {
