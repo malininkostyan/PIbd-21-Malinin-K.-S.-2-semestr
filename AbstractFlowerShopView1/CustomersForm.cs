@@ -1,22 +1,17 @@
 ﻿using AbstracFlowertShopView1;
-using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.BindingModel;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class CustomersForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ICustomerService service;
-        public CustomersForm(ICustomerService service)
+        public CustomersForm()
         {
-            InitializeComponent();
-            this.service = service;
+            InitializeComponent();         
         }
         private void FormCustomers_Load(object sender, EventArgs e)
         {
@@ -26,7 +21,7 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                List<CustomerViewModel> list = service.ListGet();
+                List<CustomerViewModel> list = APICustomer.GetRequest<List<CustomerViewModel>>("api/Customer/ListGet");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -37,13 +32,12 @@ namespace AbstractFlowerShopView1
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<CustomerForm>();
+            var form = new CustomerForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -53,13 +47,15 @@ namespace AbstractFlowerShopView1
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<CustomerForm>();
+                var form = new CustomerForm
+                {
+                    Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value)
+                };
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
                 }
-
             }
         }
 
@@ -67,18 +63,16 @@ namespace AbstractFlowerShopView1
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int id =
-                   Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DeleteElement(id);
+                        APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/DeleteElement", new CustomerBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
-                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     LoadData();
                 }

@@ -1,30 +1,22 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class MainForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private ILogService logService;
-        private readonly IServiceMain service;
-        public MainForm(IServiceMain service, ILogService logService)
+        public MainForm()
         {
             InitializeComponent();
-            this.service = service;
-            this.logService = logService;
         }
         private void LoadData()
         {
             try
             {
-                List<BookingViewModel> list = service.ListGet();
+                List<BookingViewModel> list = APICustomer.GetRequest<List<BookingViewModel>>("api/Main/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -44,33 +36,33 @@ namespace AbstractFlowerShopView1
         }
         private void покупателиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<CustomersForm>();
+            var form = new CustomersForm();
             form.ShowDialog();
         }
         private void элементыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<ElementsForm>();
+            var form = new ElementsForm();
             form.ShowDialog();
         }
         private void букетыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<BouquetsForm>();
+            var form = new BouquetsForm();
             form.ShowDialog();
         }
         private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<PutOnStorageForm>();
+            var form = new PutOnStorageForm();
             form.ShowDialog();
         }
 
         private void складыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<StoragesForm>();
+            var form = new StoragesForm();
             form.ShowDialog();
         }
         private void buttonCreateBooking_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<BookingForm>();
+            var form = new CreateBookingForm();
             form.ShowDialog();
             LoadData();
         }
@@ -81,7 +73,11 @@ namespace AbstractFlowerShopView1
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.TakeBookingInWork(new BookingBindingModel { Id = id });
+                    APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/TakeBookingInWork", new BookingBindingModel
+                    {
+                         Id = id
+                    });
+
                     LoadData();
                 }
                 catch (Exception ex)
@@ -98,7 +94,10 @@ namespace AbstractFlowerShopView1
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.FinishBooking(new BookingBindingModel { Id = id });
+                    APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/FinishBooking", new BookingBindingModel
+                    {
+                         Id = id
+                    });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -115,7 +114,10 @@ namespace AbstractFlowerShopView1
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.PayBooking(new BookingBindingModel { Id = id });
+                    APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/.PayBooking", new BookingBindingModel
+                    {
+                        Id = id
+                    });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -140,7 +142,7 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    logService.SaveBouquetPrice(new LogBindingModel
+                    APICustomer.PostRequest<LogBindingModel, bool>("api/Report/SaveBouquetPrice", new LogBindingModel
                     {
                         FileName = sfd.FileName
                     });
@@ -156,12 +158,12 @@ namespace AbstractFlowerShopView1
         }
         private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<StoragesLoadForm>();
+            var form = new StoragesLoadForm();
             form.ShowDialog();
         }
         private void заказыКлиентовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<CustomerBookingForm>();
+            var form = new CustomerBookingForm();
             form.ShowDialog();
         }
     }

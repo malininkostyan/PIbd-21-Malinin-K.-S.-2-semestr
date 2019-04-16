@@ -3,11 +3,10 @@ using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
-    public partial class FormBouquetElement : Form
+    public partial class BouquetElementForm : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
@@ -21,7 +20,7 @@ namespace AbstractFlowerShopView1
         }
         private readonly IElementService service;
         private BouquetElementViewModel model;
-        public FormBouquetElement(IElementService service)
+        public BouquetElementForm(IElementService service)
         {
             InitializeComponent();
             this.service = service;

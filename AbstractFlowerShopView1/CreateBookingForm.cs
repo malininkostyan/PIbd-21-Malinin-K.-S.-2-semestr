@@ -1,26 +1,16 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
-    public partial class BookingForm : Form
+    public partial class CreateBookingForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ICustomerService serviceC;
-        private readonly IBouquetService serviceP;
-        private readonly IServiceMain serviceM;
-        public BookingForm(ICustomerService serviceC, IBouquetService serviceP, IServiceMain serviceM)
+        public CreateBookingForm()
         {
             InitializeComponent();
-            this.serviceC = serviceC;
-            this.serviceP = serviceP;
-            this.serviceM = serviceM;
         }
         private void FormCreateBooking_Load(object sender, EventArgs e)
         {

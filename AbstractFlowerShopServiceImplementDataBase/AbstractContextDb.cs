@@ -9,8 +9,7 @@ namespace AbstractFlowerShopServiceImplementDataBase
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
-            var ensureDLLIsCopied =
-            System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Element> Elements { get; set; }
