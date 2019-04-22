@@ -16,7 +16,7 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                //List<LoadStoragesViewModel> dict = APICustomer.GetRequest<List<LoadStoragesViewModel>>("api/LoadStorages/GetLoadStorages");
+                List<LoadStoragesViewModel> dict = APICustomer.GetRequest<List<LoadStoragesViewModel>>("api/Log/GetStoragesLoad");
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
@@ -48,7 +48,7 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    APICustomer.PostRequest<LogBindingModel, bool>("api/SaveStoragesLoad/AddElement", new LogBindingModel
+                    APICustomer.PostRequest<LogBindingModel, bool>("api/Log/SaveStoragesLoad", new LogBindingModel
                     {
                         FileName = sfd.FileName
                     });

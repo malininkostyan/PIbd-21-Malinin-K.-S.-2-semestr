@@ -163,7 +163,6 @@
             // 
             // unityContainerBindingSource
             // 
-            this.unityContainerBindingSource.DataSource = typeof(Unity.UnityContainer);
             // 
             // buttonBookingReady
             // 

@@ -61,7 +61,7 @@ namespace AbstractFlowerShopView1
             }
             try
             {
-                APICustomer.PostRequest<StorageElementBindingModel, bool>("api/StorageElement/SaveElement", new StorageElementBindingModel
+                APICustomer.PostRequest<StorageElementBindingModel, bool>("api/Main/PutElementOnStorage", new StorageElementBindingModel
                 {
                     ElementId = Convert.ToInt32(comboBoxElement.SelectedValue),
                     StorageId = Convert.ToInt32(comboBoxStorage.SelectedValue),

@@ -51,7 +51,6 @@
             // 
             // iUnityContainerBindingSource
             // 
-            this.iUnityContainerBindingSource.DataSource = typeof(Unity.IUnityContainer);
             // 
             // buttonAdd
             // 

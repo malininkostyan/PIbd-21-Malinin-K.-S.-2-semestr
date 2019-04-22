@@ -41,13 +41,12 @@ namespace AbstractFlowerShopView1
         }
         private void CalcSum()
         {
-            if (comboBoxBouquet.SelectedValue != null &&
-           !string.IsNullOrEmpty(textBoxCount.Text))
+            if (comboBoxBouquet.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
                     int id = Convert.ToInt32(comboBoxBouquet.SelectedValue);
-                    //BouquetViewModel product = APICustomer.GetRequest<BouquetViewModel>("api/BouquetElement/ListGet/" + id);
+                    BouquetViewModel product = APICustomer.GetRequest<BouquetViewModel>("api/Bouquet/ElementGet/" + id);
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxTotal.Text = (count * (int)product.Cost).ToString();
                 }
@@ -88,7 +87,7 @@ namespace AbstractFlowerShopView1
             }
             try
             {
-               APICustomer.PostRequest<BookingBindingModel, bool>("api/CreateBooking/SaveElement", new BookingBindingModel
+               APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/CreateBooking", new BookingBindingModel
                {
                     CustomerId = Convert.ToInt32(comboBoxCustomer.SelectedValue),
                     BouquetId = Convert.ToInt32(comboBoxBouquet.SelectedValue),

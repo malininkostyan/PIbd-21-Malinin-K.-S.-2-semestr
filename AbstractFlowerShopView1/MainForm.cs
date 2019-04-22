@@ -16,7 +16,7 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                List<BookingViewModel> list = APICustomer.GetRequest<List<BookingViewModel>>("api/Main/GetList");
+                List<BookingViewModel> list = APICustomer.GetRequest<List<BookingViewModel>>("api/Main/ListGet");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -114,7 +114,7 @@ namespace AbstractFlowerShopView1
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/.PayBooking", new BookingBindingModel
+                    APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/PayBooking", new BookingBindingModel
                     {
                         Id = id
                     });
@@ -142,7 +142,7 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    APICustomer.PostRequest<LogBindingModel, bool>("api/Report/SaveBouquetPrice", new LogBindingModel
+                    APICustomer.PostRequest<LogBindingModel, bool>("api/Log/SaveBouquetPrice", new LogBindingModel
                     {
                         FileName = sfd.FileName
                     });
