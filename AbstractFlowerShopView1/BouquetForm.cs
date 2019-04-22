@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class BouquetForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IBouquetService service;
         private int? id;
         private List<BouquetElementViewModel> productElements;
-        public BouquetForm(IBouquetService service)
+        public BouquetForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormBouquet_Load(object sender, EventArgs e)
         {
@@ -27,12 +21,12 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    BouquetViewModel view = service.ElementGet(id.Value);
-                    if (view != null)
+                    BouquetViewModel customer = APICustomer.GetRequest<BouquetViewModel>("api/Bouquet/ElementGet/" + id.Value);
+                    if (customer != null)
                     {
-                        textBoxName.Text = view.BouquetName;
-                        textBoxPrice.Text = view.Cost.ToString();
-                        productElements = view.BouquetElements;
+                        textBoxName.Text = customer.BouquetName;
+                        textBoxPrice.Text = customer.Cost.ToString();
+                        productElements = customer.BouquetElements;
                         LoadData();
                     }
                 }
@@ -70,7 +64,7 @@ namespace AbstractFlowerShopView1
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormBouquetElement>();
+            var form = new BouquetElementForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (form.Model != null)
@@ -88,9 +82,10 @@ namespace AbstractFlowerShopView1
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormBouquetElement>();
-                form.Model =
-                productElements[dataGridView.SelectedRows[0].Cells[0].RowIndex];
+                var form = new BouquetElementForm
+                {
+                    Model = productElements[dataGridView.SelectedRows[0].Cells[0].RowIndex]
+                };
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     productElements[dataGridView.SelectedRows[0].Cells[0].RowIndex] =
@@ -108,7 +103,6 @@ namespace AbstractFlowerShopView1
                 {
                     try
                     {
-
                         productElements.RemoveAt(dataGridView.SelectedRows[0].Cells[0].RowIndex);
                     }
                     catch (Exception ex)
@@ -160,8 +154,8 @@ namespace AbstractFlowerShopView1
                 }
                 if (id.HasValue)
                 {
-                    service.UpdateElement(new BouquetBindingModel
-                    {
+                    APICustomer.PostRequest<BouquetBindingModel, bool>("api/Bouquet/UpdateElement", new BouquetBindingModel
+                   {
                         Id = id.Value,
                         BouquetName = textBoxName.Text,
                         Cost = Convert.ToInt32(textBoxPrice.Text),
@@ -170,7 +164,7 @@ namespace AbstractFlowerShopView1
                 }
                 else
                 {
-                    service.AddElement(new BouquetBindingModel
+                    APICustomer.PostRequest<BouquetBindingModel, bool>("api/Bouquet/AddElement", new BouquetBindingModel
                     {
                         BouquetName = textBoxName.Text,
                         Cost = Convert.ToInt32(textBoxPrice.Text),

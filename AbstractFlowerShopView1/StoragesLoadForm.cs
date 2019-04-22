@@ -1,26 +1,22 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class StoragesLoadForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ILogService service;
-        public StoragesLoadForm(ILogService service)
+        public StoragesLoadForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormStoragesLoad_Load(object sender, EventArgs e)
         {
             try
             {
-                var dict = service.GetStoragesLoad();
+                List<LoadStoragesViewModel> dict = APICustomer.GetRequest<List<LoadStoragesViewModel>>("api/Log/GetStoragesLoad");
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
@@ -52,7 +48,7 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    service.SaveStoragesLoad(new LogBindingModel
+                    APICustomer.PostRequest<LogBindingModel, bool>("api/Log/SaveStoragesLoad", new LogBindingModel
                     {
                         FileName = sfd.FileName
                     });

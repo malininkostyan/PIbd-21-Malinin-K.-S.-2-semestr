@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using AbstractFlowerShopServiceDAL1.BindingModel;
 
@@ -10,24 +8,15 @@ namespace AbstractFlowerShopView1
 {
     public partial class PutOnStorageForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IStorageService serviceS;
-        private readonly IElementService serviceC;
-        private readonly IServiceMain serviceM;
-        public PutOnStorageForm(IStorageService serviceS, IElementService serviceC,
-        IServiceMain serviceM)
+        public PutOnStorageForm()
         {
             InitializeComponent();
-            this.serviceS = serviceS;
-            this.serviceC = serviceC;
-            this.serviceM = serviceM;
         }
         private void FormPutOnStorage_Load(object sender, EventArgs e)
         {
             try
             {
-                List<ElementViewModel> listC = serviceC.ListGet();
+                List<ElementViewModel> listC = APICustomer.GetRequest<List<ElementViewModel>>("api/Element/ListGet");
                 if (listC != null)
                 {
                     comboBoxElement.DisplayMember = "ElementName";
@@ -35,7 +24,7 @@ namespace AbstractFlowerShopView1
                     comboBoxElement.DataSource = listC;
                     comboBoxElement.SelectedItem = null;
                 }
-                List<StorageViewModel> listS = serviceS.ListGet();
+                List<StorageViewModel> listS = APICustomer.GetRequest<List<StorageViewModel>>("api/Storage/ListGet");
                 if (listS != null)
                 {
                     comboBoxStorage.DisplayMember = "StorageName";
@@ -72,7 +61,7 @@ namespace AbstractFlowerShopView1
             }
             try
             {
-                serviceM.PutElementOnStorage(new StorageElementBindingModel
+                APICustomer.PostRequest<StorageElementBindingModel, bool>("api/Main/PutElementOnStorage", new StorageElementBindingModel
                 {
                     ElementId = Convert.ToInt32(comboBoxElement.SelectedValue),
                     StorageId = Convert.ToInt32(comboBoxStorage.SelectedValue),

@@ -3,21 +3,16 @@ using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class StorageForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IStorageService service;
         private int? id;
-        public StorageForm(IStorageService service)
+        public StorageForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormStorage_Load(object sender, EventArgs e)
         {
@@ -25,16 +20,15 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    StorageViewModel view = service.ElementGet(id.Value);
-                    if (view != null)
+                    StorageViewModel storage = APICustomer.GetRequest<StorageViewModel>("api/Storage/ElementGet/" + id.Value);
+                    if (storage != null)
                     {
-                        textBoxName.Text = view.StorageName;
-                        dataGridView.DataSource = view.StorageElements;
+                        textBoxName.Text = storage.StorageName;
+                        dataGridView.DataSource = storage.StorageElements;
                         dataGridView.Columns[0].Visible = false;
                         dataGridView.Columns[1].Visible = false;
                         dataGridView.Columns[2].Visible = false;
-                        dataGridView.Columns[3].AutoSizeMode =
-                       DataGridViewAutoSizeColumnMode.Fill;
+                        dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     }
                 }
                 catch (Exception ex)
@@ -56,7 +50,7 @@ namespace AbstractFlowerShopView1
             {
                 if (id.HasValue)
                 {
-                    service.UpdateElement(new StorageBindingModel
+                    APICustomer.PostRequest<StorageBindingModel, bool>("api/Storage/UpdateElement", new StorageBindingModel
                     {
                         Id = id.Value,
                         StorageName = textBoxName.Text
@@ -64,7 +58,7 @@ namespace AbstractFlowerShopView1
                 }
                 else
                 {
-                    service.AddElement(new StorageBindingModel
+                    APICustomer.PostRequest<StorageBindingModel, bool>("api/Storage/AddElement", new StorageBindingModel
                     {
                         StorageName = textBoxName.Text
                     });

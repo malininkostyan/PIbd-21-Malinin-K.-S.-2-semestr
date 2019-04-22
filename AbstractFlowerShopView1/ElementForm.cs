@@ -1,23 +1,16 @@
-﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
-using AbstractFlowerShopServiceDAL1.ViewModel;
+﻿using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class ElementForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }    
-        private readonly IElementService service;
         private int? id;
-        public ElementForm(IElementService service)
+        public ElementForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormElement_Load(object sender, EventArgs e)
         {
@@ -25,10 +18,10 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    ElementViewModel view = service.ElementGet(id.Value);
-                    if (view != null)
+                    ElementViewModel element = APICustomer.GetRequest<ElementViewModel>("api/Element/ElementGet/" + id.Value);
+                    if (element != null)
                     {
-                        textBoxName.Text = view.ElementName;
+                        textBoxName.Text = element.ElementName;
                     }
                 }
                 catch (Exception ex)
@@ -50,7 +43,7 @@ namespace AbstractFlowerShopView1
             {
                 if (id.HasValue)
                 {
-                    service.UpdateElement(new ElementBindingModel
+                    APICustomer.PostRequest<ElementViewModel, bool>("api/Element/UpdateElement", new ElementViewModel
                     {
                         Id = id.Value,
                         ElementName = textBoxName.Text
@@ -58,7 +51,7 @@ namespace AbstractFlowerShopView1
                 }
                 else
                 {
-                    service.AddElement(new ElementBindingModel
+                    APICustomer.PostRequest<ElementViewModel, bool>("api/Element/AddElement", new ElementViewModel
                     {
                         ElementName = textBoxName.Text
                     });

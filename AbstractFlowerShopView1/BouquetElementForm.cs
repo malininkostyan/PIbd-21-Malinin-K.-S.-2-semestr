@@ -1,16 +1,12 @@
-﻿using AbstractFlowerShopServiceDAL1.Interfaces;
-using AbstractFlowerShopServiceDAL1.ViewModel;
+﻿using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
-    public partial class FormBouquetElement : Form
+    public partial class BouquetElementForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public BouquetElementViewModel Model
         {
             set { model = value; }
@@ -19,18 +15,16 @@ namespace AbstractFlowerShopView1
                 return model;
             }
         }
-        private readonly IElementService service;
         private BouquetElementViewModel model;
-        public FormBouquetElement(IElementService service)
+        public BouquetElementForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormBouquetElement_Load(object sender, EventArgs e)
         {
             try
             {
-                List<ElementViewModel> list = service.ListGet();
+                List<ElementViewModel> list = APICustomer.GetRequest<List<ElementViewModel>>("api/Element/ListGet");
                 if (list != null)
                 {
                     comboBoxElement.DisplayMember = "ElementName";

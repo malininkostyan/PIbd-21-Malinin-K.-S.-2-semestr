@@ -1,6 +1,6 @@
 ﻿namespace AbstractFlowerShopView1
 {
-    partial class BookingForm
+    partial class CreateBookingForm
     {
         /// <summary>
         /// Required designer variable.

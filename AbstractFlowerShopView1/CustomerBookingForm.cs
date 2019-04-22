@@ -1,21 +1,17 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
     public partial class CustomerBookingForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ILogService service;
-        public CustomerBookingForm(ILogService service)
+        public CustomerBookingForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void buttonMake_Click(object sender, EventArgs e)
         {
@@ -31,12 +27,13 @@ namespace AbstractFlowerShopView1
                 "c  " + dateTimePickerFrom.Value.ToShortDateString() +
                 "  по  " + dateTimePickerTo.Value.ToShortDateString());
                 reportViewer.LocalReport.SetParameters(parameter);
-                var dataSource = service.GetCustomerBookings(new LogBindingModel
+                List<CustomerBookingViewModel> response = APICustomer.PostRequest<LogBindingModel,
+                List<CustomerBookingViewModel>>("api/Log/GetCustomerBookings", new LogBindingModel
                 {
                     DateFrom = dateTimePickerFrom.Value,
                     DateTo = dateTimePickerTo.Value
                 });
-                ReportDataSource source = new ReportDataSource("DataSetBookings", dataSource);
+                ReportDataSource source = new ReportDataSource("DataSetBookings", response);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }
@@ -62,7 +59,7 @@ namespace AbstractFlowerShopView1
             {
                 try
                 {
-                    service.SaveCustomerBookings(new LogBindingModel
+                    APICustomer.PostRequest<LogBindingModel, bool>("api/Log/SaveCustomerBookings", new LogBindingModel
                     {
                         FileName = sfd.FileName,
                         DateFrom = dateTimePickerFrom.Value,
@@ -81,7 +78,6 @@ namespace AbstractFlowerShopView1
 
         private void CustomerBookingForm_Load(object sender, EventArgs e)
         {
-
             reportViewer.RefreshReport();
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace AbstractFlowerShopView1
 {
-    partial class FormBouquetElement
+    partial class BouquetElementForm
     {
         /// <summary>
         /// Required designer variable.

@@ -71,13 +71,13 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                     {
                         throw new Exception("Заказ не в статусе \"Принят\"");
                     }
-                    var bouquetElements = context.BouquetElements.Include(rec => rec.Element).Where(rec => rec.BouquetId == element.BouquetId);
+                    var bouquetElements = context.BouquetElements.Include(rec => rec.Element).Where(rec => rec.BouquetId == element.BouquetId).ToList();
                     
                     foreach (var bouquetElement in bouquetElements)
                     {
                         int countOnStorages = bouquetElement.Amount * element.Amount;
                         var storageElements = context.StorageElements.Where(rec =>
-                        rec.ElementId == bouquetElement.ElementId);
+                        rec.ElementId == bouquetElement.ElementId).ToList();
                         foreach (var storageElement in storageElements)
                         {
                            

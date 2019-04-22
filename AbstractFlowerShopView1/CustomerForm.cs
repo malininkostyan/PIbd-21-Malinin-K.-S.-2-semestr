@@ -1,23 +1,19 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
+using AbstractFlowerShopView1;
 using System;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstracFlowertShopView1
 {
     public partial class CustomerForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly ICustomerService service;
         private int? id;
-        public CustomerForm(ICustomerService service)
+
+        public CustomerForm()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormCustomer_Load(object sender, EventArgs e)
         {
@@ -25,53 +21,47 @@ namespace AbstracFlowertShopView1
             {
                 try
                 {
-                    CustomerViewModel view = service.ElementGet(id.Value);
-                    if (view != null)
-                    {
-                        textBoxFIO.Text = view.CustomerFIO;
-                    }
+                    CustomerViewModel customer = APICustomer.GetRequest<CustomerViewModel>("api/Customer/ElementGet/" + id.Value);
+                    textBoxFIO.Text = customer.CustomerFIO;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
             }
         }
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxFIO.Text))
             {
-                MessageBox.Show("Заполните ФИО", "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show("Заполните ФИО", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             try
             {
                 if (id.HasValue)
                 {
-                    service.UpdateElement(new CustomerBindingModel
+                    APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/UpdateElement", new CustomerBindingModel
                     {
-                        Id = id.Value,
-                        CustomerFIO = textBoxFIO.Text
+                       Id = id.Value,
+                       CustomerFIO = textBoxFIO.Text
                     });
                 }
                 else
                 {
-                    service.AddElement(new CustomerBindingModel
-                    {
-                        CustomerFIO = textBoxFIO.Text
-                    });
+                   APICustomer.PostRequest<CustomerBindingModel,bool>("api/Customer/AddElement", new CustomerBindingModel
+                   {
+                       CustomerFIO = textBoxFIO.Text
+                   });
                 }
-                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
-               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void buttonCancel_Click(object sender, EventArgs e)

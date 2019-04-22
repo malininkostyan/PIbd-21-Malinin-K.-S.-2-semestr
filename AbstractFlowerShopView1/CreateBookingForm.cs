@@ -1,32 +1,22 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 
 namespace AbstractFlowerShopView1
 {
-    public partial class BookingForm : Form
+    public partial class CreateBookingForm : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ICustomerService serviceC;
-        private readonly IBouquetService serviceP;
-        private readonly IServiceMain serviceM;
-        public BookingForm(ICustomerService serviceC, IBouquetService serviceP, IServiceMain serviceM)
+        public CreateBookingForm()
         {
             InitializeComponent();
-            this.serviceC = serviceC;
-            this.serviceP = serviceP;
-            this.serviceM = serviceM;
         }
         private void FormCreateBooking_Load(object sender, EventArgs e)
         {
             try
             {
-                List<CustomerViewModel> listC = serviceC.ListGet();
+                List<CustomerViewModel> listC = APICustomer.GetRequest<List<CustomerViewModel>>("api/Customer/ListGet");
                 if (listC != null)
                 {
                     comboBoxCustomer.DisplayMember = "CustomerFIO";
@@ -34,7 +24,7 @@ namespace AbstractFlowerShopView1
                     comboBoxCustomer.DataSource = listC;
                     comboBoxCustomer.SelectedItem = null;
                 }
-                List<BouquetViewModel> listP = serviceP.ListGet();
+                List<BouquetViewModel> listP = APICustomer.GetRequest<List<BouquetViewModel>>("api/Bouquet/ListGet");
                 if (listP != null)
                 {
                     comboBoxBouquet.DisplayMember = "BouquetName";
@@ -51,15 +41,14 @@ namespace AbstractFlowerShopView1
         }
         private void CalcSum()
         {
-            if (comboBoxBouquet.SelectedValue != null &&
-           !string.IsNullOrEmpty(textBoxCount.Text))
+            if (comboBoxBouquet.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
                     int id = Convert.ToInt32(comboBoxBouquet.SelectedValue);
-                    BouquetViewModel product = serviceP.ElementGet(id);
+                    BouquetViewModel product = APICustomer.GetRequest<BouquetViewModel>("api/Bouquet/ElementGet/" + id);
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxTotal.Text = (count * (Int32)product.Cost).ToString();
+                    textBoxTotal.Text = (count * (int)product.Cost).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -98,8 +87,8 @@ namespace AbstractFlowerShopView1
             }
             try
             {
-                serviceM.CreateBooking(new BookingBindingModel
-                {
+               APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/CreateBooking", new BookingBindingModel
+               {
                     CustomerId = Convert.ToInt32(comboBoxCustomer.SelectedValue),
                     BouquetId = Convert.ToInt32(comboBoxBouquet.SelectedValue),
                     Amount = Convert.ToInt32(textBoxCount.Text),
