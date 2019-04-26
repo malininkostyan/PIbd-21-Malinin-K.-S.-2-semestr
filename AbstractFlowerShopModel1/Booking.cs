@@ -7,6 +7,7 @@ namespace AbstractFlowerShopModel1
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public int BouquetId { get; set; }
+        public int? ExecutorId { get; set; }
         public int Amount { get; set; }
         public decimal Total { get; set; }
         public BookingStatus Status { get; set; }
@@ -14,5 +15,6 @@ namespace AbstractFlowerShopModel1
         public DateTime? ImplementDate { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Bouquet Bouquet { get; set; }
+        public virtual Executor Executor { get; set; }
     }
 }

@@ -32,6 +32,14 @@ namespace AbstractFlowerShopView1
                     comboBoxBouquet.DataSource = listP;
                     comboBoxBouquet.SelectedItem = null;
                 }
+                List<ExecutorViewModel> listE = APICustomer.GetRequest<List<ExecutorViewModel>>("api/Executor/ListGet");
+                if (listE != null)
+                {
+                    comboBoxExecutor.DisplayMember = "ExecutorFIO";
+                    comboBoxExecutor.ValueMember = "Id";
+                    comboBoxExecutor.DataSource = listE;
+                    comboBoxExecutor.SelectedItem = null;
+                }
             }
             catch (Exception ex)
             {
@@ -41,7 +49,7 @@ namespace AbstractFlowerShopView1
         }
         private void CalcSum()
         {
-            if (comboBoxBouquet.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
+            if (comboBoxBouquet.SelectedValue != null && comboBoxBouquet.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {

@@ -12,6 +12,8 @@ namespace AbstractFlowerShopServiceDAL1.BindingModel
         [DataMember]
         public int BouquetId { get; set; }
         [DataMember]
+        public int? ExecutorId { get; set; }
+        [DataMember]
         public int Amount { get; set; }
         [DataMember]
         public decimal Total { get; set; }

@@ -38,6 +38,8 @@
             this.textBoxTotal = new System.Windows.Forms.TextBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxExecutor = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -61,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 105);
+            this.label3.Location = new System.Drawing.Point(12, 140);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 17);
             this.label3.TabIndex = 3;
@@ -70,7 +72,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 74);
+            this.label4.Location = new System.Drawing.Point(12, 106);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 17);
             this.label4.TabIndex = 2;
@@ -95,7 +97,7 @@
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(129, 73);
+            this.textBoxCount.Location = new System.Drawing.Point(129, 105);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(318, 22);
             this.textBoxCount.TabIndex = 6;
@@ -103,14 +105,14 @@
             // 
             // textBoxTotal
             // 
-            this.textBoxTotal.Location = new System.Drawing.Point(129, 105);
+            this.textBoxTotal.Location = new System.Drawing.Point(129, 140);
             this.textBoxTotal.Name = "textBoxTotal";
             this.textBoxTotal.Size = new System.Drawing.Size(318, 22);
             this.textBoxTotal.TabIndex = 7;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(349, 146);
+            this.buttonCancel.Location = new System.Drawing.Point(350, 180);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(98, 27);
             this.buttonCancel.TabIndex = 11;
@@ -120,7 +122,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(245, 146);
+            this.buttonSave.Location = new System.Drawing.Point(240, 180);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(98, 27);
             this.buttonSave.TabIndex = 10;
@@ -128,11 +130,30 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // BookingForm
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 17);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Сотрудник:";
+            // 
+            // comboBoxExecutor
+            // 
+            this.comboBoxExecutor.FormattingEnabled = true;
+            this.comboBoxExecutor.Location = new System.Drawing.Point(128, 69);
+            this.comboBoxExecutor.Name = "comboBoxExecutor";
+            this.comboBoxExecutor.Size = new System.Drawing.Size(319, 24);
+            this.comboBoxExecutor.TabIndex = 13;
+            // 
+            // CreateBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 185);
+            this.ClientSize = new System.Drawing.Size(467, 219);
+            this.Controls.Add(this.comboBoxExecutor);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxTotal);
@@ -143,7 +164,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "BookingForm";
+            this.Name = "CreateBookingForm";
             this.Text = "Заказ";
             this.Load += new System.EventHandler(this.FormCreateBooking_Load);
             this.ResumeLayout(false);
@@ -163,5 +184,7 @@
         private System.Windows.Forms.TextBox textBoxTotal;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBoxExecutor;
     }
 }

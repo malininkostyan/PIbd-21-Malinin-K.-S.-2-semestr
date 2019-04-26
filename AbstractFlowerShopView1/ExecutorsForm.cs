@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace AbstractFlowerShopView1
 {
-    public partial class StoragesForm : Form
+    public partial class ExecutorsForm : Form
     {
-        public StoragesForm()
+        public ExecutorsForm()
         {
             InitializeComponent();
         }
-        private void FormStorages_Load(object sender, EventArgs e)
+        private void FormExecutors_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -20,23 +20,23 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                 List<StorageViewModel> list = APICustomer.GetRequest<List<StorageViewModel>>("api/Storage/ListGet");
+                List<ExecutorViewModel> list = APICustomer.GetRequest<List<ExecutorViewModel>>("api/Executor/ListGet");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[1].AutoSizeMode =
+                    DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = new StorageForm();
+            var form = new ExecutorForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -46,10 +46,11 @@ namespace AbstractFlowerShopView1
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = new StorageForm
+                var form = new ExecutorForm
                 {
                     Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value)
                 };
+                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
@@ -61,13 +62,12 @@ namespace AbstractFlowerShopView1
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                         APICustomer.PostRequest<StorageBindingModel, bool>("api/Storage/DeleteElement", new StorageBindingModel { Id = id });
+                        APICustomer.PostRequest<ExecutorBindingModel, bool>("api/Executor/DeleteElement", new ExecutorBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

@@ -1,6 +1,9 @@
-﻿using AbstractFlowerShopServiceDAL1.BindingModel;
+﻿using AbstractFlowerShopRestApi.Services;
+using AbstractFlowerShopServiceDAL1.BindingModel;
 using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace AbstractFlowerShopRestApi.Controllers
@@ -8,9 +11,11 @@ namespace AbstractFlowerShopRestApi.Controllers
     public class MainController : ApiController
     {
         private readonly IServiceMain _service;
-        public MainController(IServiceMain service)
+        private readonly IExecutorService _serviceExecutor;
+        public MainController(IServiceMain service, IExecutorService serviceExecutor)
         {
             _service = service;
+            _serviceExecutor = serviceExecutor;
         }
         [HttpGet]
         public IHttpActionResult ListGet()
@@ -28,16 +33,6 @@ namespace AbstractFlowerShopRestApi.Controllers
             _service.CreateBooking(model);
         }
         [HttpPost]
-        public void TakeBookingInWork(BookingBindingModel model)
-        {
-            _service.TakeBookingInWork(model);
-        }
-        [HttpPost]
-        public void FinishBooking(BookingBindingModel model)
-        {
-            _service.FinishBooking(model);
-        }
-        [HttpPost]
         public void PayBooking(BookingBindingModel model)
         {
             _service.PayBooking(model);
@@ -46,6 +41,20 @@ namespace AbstractFlowerShopRestApi.Controllers
         public void PutElementOnStorage(StorageElementBindingModel model)
         {
             _service.PutElementOnStorage(model);
+        }
+        [HttpPost]
+        public void StartWork()
+        {
+            List<BookingViewModel> bookings = _service.GetFreeBookings();
+            foreach (var booking in bookings)
+            {
+                ExecutorViewModel impl = _serviceExecutor.GetFreeWorker();
+                if (impl == null)
+                {
+                    throw new Exception("Нет сотрудников");
+                }
+                new WorkExecutor(_service, _serviceExecutor, impl.Id, booking.Id);
+            }
         }
     }
 }

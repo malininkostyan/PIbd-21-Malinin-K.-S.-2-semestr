@@ -16,6 +16,10 @@ namespace AbstractFlowerShopServiceDAL1.ViewModel
         [DataMember]
         public string BouquetName { get; set; }
         [DataMember]
+        public int? ExecutorId { get; set; }
+        [DataMember]
+        public string ExecutorFIO { get; set; }
+        [DataMember]
         public int Amount { get; set; }
         [DataMember]
         public decimal Total { get; set; }
