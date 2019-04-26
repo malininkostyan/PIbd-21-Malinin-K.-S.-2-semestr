@@ -93,12 +93,19 @@ namespace AbstractFlowerShopView1
                MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxExecutor.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите сотрудника", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/CreateBooking", new BookingBindingModel
                {
                     CustomerId = Convert.ToInt32(comboBoxCustomer.SelectedValue),
                     BouquetId = Convert.ToInt32(comboBoxBouquet.SelectedValue),
+                    ExecutorId = Convert.ToInt32(comboBoxExecutor.SelectedValue),
                     Amount = Convert.ToInt32(textBoxCount.Text),
                     Total = Convert.ToInt32(textBoxTotal.Text)
                 });
