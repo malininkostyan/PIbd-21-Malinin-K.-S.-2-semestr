@@ -39,6 +39,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Total = rec.Total,
                 CustomerFIO = rec.Customer.CustomerFIO,
                 BouquetName = rec.Bouquet.BouquetName,
+                ExecutorId = rec.ExecutorId,
                 ExecutorFIO = rec.Executor.ExecutorFIO
             })
             .ToList();
@@ -103,6 +104,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                         }
                     }
                     element.ImplementDate = DateTime.Now;
+                    element.ExecutorId = model.ExecutorId;
                     element.Status = BookingStatus.Выполняется;
                     context.SaveChanges();
                     transaction.Commit();
