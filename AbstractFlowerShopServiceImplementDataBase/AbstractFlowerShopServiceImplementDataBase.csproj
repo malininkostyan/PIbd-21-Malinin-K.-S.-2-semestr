@@ -83,10 +83,6 @@
     <Compile Include="Migrations\201904261549297_FourthMigration.Designer.cs">
       <DependentUpon>201904261549297_FourthMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904262108019_FifthMigration.cs" />
-    <Compile Include="Migrations\201904262108019_FifthMigration.Designer.cs">
-      <DependentUpon>201904262108019_FifthMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -124,9 +120,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904261549297_FourthMigration.resx">
       <DependentUpon>201904261549297_FourthMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904262108019_FifthMigration.resx">
-      <DependentUpon>201904262108019_FifthMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
