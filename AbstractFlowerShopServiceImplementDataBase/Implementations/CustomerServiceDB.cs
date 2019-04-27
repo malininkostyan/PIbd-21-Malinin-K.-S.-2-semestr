@@ -20,7 +20,8 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             List<CustomerViewModel> result = context.Customers.Select(rec => new CustomerViewModel
             {
                 Id = rec.Id,
-                CustomerFIO = rec.CustomerFIO
+                CustomerFIO = rec.CustomerFIO,
+                Mail = rec.Mail
             })
             .ToList();
             return result;
@@ -33,7 +34,18 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 return new CustomerViewModel
                 {
                     Id = element.Id,
-                    CustomerFIO = element.CustomerFIO
+                    CustomerFIO = element.CustomerFIO,
+                    Mail = element.Mail,
+                    InfoMessages = context.InfoMessages
+                    .Where(recM => recM.CustomerId == element.Id)
+                    .Select(recM => new InfoMessageViewModel
+                    {
+                        MessageId = recM.MessageId,
+                        DeliveryDate = recM.DeliveryDate,
+                        Subject = recM.Subject,
+                        Body = recM.Body
+                    })
+                    .ToList()
                 };
             }
             throw new Exception("Элемент не найден");
@@ -48,7 +60,8 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             }
             context.Customers.Add(new Customer
             {
-                CustomerFIO = model.CustomerFIO
+                CustomerFIO = model.CustomerFIO,
+                Mail = model.Mail
             });
             context.SaveChanges();
         }
@@ -66,6 +79,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 throw new Exception("Элемент не найден");
             }
             element.CustomerFIO = model.CustomerFIO;
+            element.Mail = model.Mail;
             context.SaveChanges();
         }
         public void DeleteElement(int id)
