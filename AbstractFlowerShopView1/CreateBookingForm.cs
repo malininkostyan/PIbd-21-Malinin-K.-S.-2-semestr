@@ -41,7 +41,7 @@ namespace AbstractFlowerShopView1
         }
         private void CalcSum()
         {
-            if (comboBoxBouquet.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
+            if (comboBoxBouquet.SelectedValue != null && comboBoxBouquet.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
@@ -85,6 +85,7 @@ namespace AbstractFlowerShopView1
                MessageBoxIcon.Error);
                 return;
             }
+            
             try
             {
                APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/CreateBooking", new BookingBindingModel

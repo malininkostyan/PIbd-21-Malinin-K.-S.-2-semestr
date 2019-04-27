@@ -38,7 +38,9 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Amount = rec.Amount,
                 Total = rec.Total,
                 CustomerFIO = rec.Customer.CustomerFIO,
-                BouquetName = rec.Bouquet.BouquetName
+                BouquetName = rec.Bouquet.BouquetName,
+                ExecutorId = rec.ExecutorId,
+                ExecutorFIO = rec.Executor.ExecutorFIO
             })
             .ToList();
             return result;
@@ -49,6 +51,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             {
                 CustomerId = model.CustomerId,
                 BouquetId = model.BouquetId,
+                ExecutorId = model.ExecutorId,
                 CreateDate = DateTime.Now,
                 Amount = model.Amount,
                 Total = model.Total,
@@ -101,6 +104,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                         }
                     }
                     element.ImplementDate = DateTime.Now;
+                    element.ExecutorId = model.ExecutorId;
                     element.Status = BookingStatus.Выполняется;
                     context.SaveChanges();
                     transaction.Commit();
@@ -158,6 +162,17 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 });
             }
             context.SaveChanges();
+        }
+        public List<BookingViewModel> GetFreeBookings()
+        {
+            List<BookingViewModel> result = context.Bookings
+            .Where(x => x.Status == BookingStatus.Принят || x.Status == BookingStatus.НедостаточноРесурсов)
+            .Select(rec => new BookingViewModel
+            {
+                Id = rec.Id
+            })
+            .ToList();
+            return result;
         }
     }
 }

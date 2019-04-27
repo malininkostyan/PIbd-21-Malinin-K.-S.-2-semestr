@@ -54,12 +54,14 @@
     <Compile Include="BindingModel\BouquetElementBindingModel.cs" />
     <Compile Include="BindingModel\CustomerBindingModel.cs" />
     <Compile Include="BindingModel\ElementBindingModel.cs" />
+    <Compile Include="BindingModel\ExecutorBindingModel.cs" />
     <Compile Include="BindingModel\LogBindingModel.cs" />
     <Compile Include="BindingModel\StorageBindingModel.cs" />
     <Compile Include="BindingModel\StorageElementBindingModel.cs" />
     <Compile Include="Interfaces\IBouquetService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\IElementService.cs" />
+    <Compile Include="Interfaces\IExecutorService.cs" />
     <Compile Include="Interfaces\ILogService.cs" />
     <Compile Include="Interfaces\IServiceMain.cs" />
     <Compile Include="Interfaces\IStorageService.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="ViewModel\CustomerBookingViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
+    <Compile Include="ViewModel\ExecutorViewModel.cs" />
     <Compile Include="ViewModel\LoadStoragesViewModel.cs" />
     <Compile Include="ViewModel\StorageElementViewModel.cs" />
     <Compile Include="ViewModel\StorageViewModel.cs" />

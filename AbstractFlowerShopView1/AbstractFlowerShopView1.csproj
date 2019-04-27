@@ -141,6 +141,18 @@
     <Compile Include="ElementsForm.Designer.cs">
       <DependentUpon>ElementsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExecutorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExecutorForm.Designer.cs">
+      <DependentUpon>ExecutorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExecutorsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExecutorsForm.Designer.cs">
+      <DependentUpon>ExecutorsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ElementsForm.resx">
       <DependentUpon>ElementsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExecutorForm.resx">
+      <DependentUpon>ExecutorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

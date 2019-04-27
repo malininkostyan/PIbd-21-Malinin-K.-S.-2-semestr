@@ -38,6 +38,8 @@ namespace AbstractFlowerShopRestApi
             HierarchicalLifetimeManager());
             container.RegisterType<ILogService, LogServiceDB>(new
             HierarchicalLifetimeManager());
+            container.RegisterType<IExecutorService, ExecutorServiceDB>(new
+            HierarchicalLifetimeManager());
         }
     }
 }

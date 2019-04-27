@@ -61,6 +61,7 @@
     <Compile Include="Implementations\BouquetServiceDB.cs" />
     <Compile Include="Implementations\CustomerServiceDB.cs" />
     <Compile Include="Implementations\ElementServiceDB.cs" />
+    <Compile Include="Implementations\ExecutorServiceDB.cs" />
     <Compile Include="Implementations\LogServiceDB.cs" />
     <Compile Include="Implementations\StorageServiceDB.cs" />
     <Compile Include="Implementations\ServiceMainDB.cs" />
@@ -75,6 +76,10 @@
     <Compile Include="Migrations\201903291915239_ThirdMigration.cs" />
     <Compile Include="Migrations\201903291915239_ThirdMigration.Designer.cs">
       <DependentUpon>201903291915239_ThirdMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904261549297_FourthMigration.cs" />
+    <Compile Include="Migrations\201904261549297_FourthMigration.Designer.cs">
+      <DependentUpon>201904261549297_FourthMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903291915239_ThirdMigration.resx">
       <DependentUpon>201903291915239_ThirdMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904261549297_FourthMigration.resx">
+      <DependentUpon>201904261549297_FourthMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

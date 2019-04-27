@@ -142,5 +142,16 @@ namespace AbstractFlowerShopServiceImplementList1.Implementations
                 });
             }
         }
+        public List<BookingViewModel> GetFreeBookings()
+        {
+            List<BookingViewModel> result = origin.Bookings
+            .Where(x => x.Status == BookingStatus.Принят || x.Status == BookingStatus.НедостаточноРесурсов)
+            .Select(rec => new BookingViewModel
+            {
+                Id = rec.Id
+            })
+            .ToList();
+            return result;
+        }
     }
 }

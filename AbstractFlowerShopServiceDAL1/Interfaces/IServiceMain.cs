@@ -7,6 +7,7 @@ namespace AbstractFlowerShopServiceDAL1.Interfaces
     public interface IServiceMain
     {
         List<BookingViewModel> ListGet();
+        List<BookingViewModel> GetFreeBookings();
         void CreateBooking(BookingBindingModel model);
         void TakeBookingInWork(BookingBindingModel model);
         void FinishBooking(BookingBindingModel model);

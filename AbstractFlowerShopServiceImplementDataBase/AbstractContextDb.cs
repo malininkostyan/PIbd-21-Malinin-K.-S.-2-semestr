@@ -18,5 +18,6 @@ namespace AbstractFlowerShopServiceImplementDataBase
         public virtual DbSet<BouquetElement> BouquetElements { get; set; }
         public virtual DbSet<Storage> Storages { get; set; }
         public virtual DbSet<StorageElement> StorageElements { get; set; }
+        public virtual DbSet<Executor> Executors { get; set; }
     }
 }
