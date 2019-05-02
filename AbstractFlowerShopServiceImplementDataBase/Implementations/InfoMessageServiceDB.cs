@@ -66,7 +66,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Body = model.Body
             };
             var mailAddress = Regex.Match(model.FromMailAddress,
-           @"(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9az])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))");
+           @"(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)");
             if (mailAddress.Success)
             {
                 var customer = context.Customers.FirstOrDefault(rec => rec.Mail ==  mailAddress.Value);

@@ -23,8 +23,8 @@ namespace AbstracFlowertShopView1
                 try
                 {
                     CustomerViewModel customer = APICustomer.GetRequest<CustomerViewModel>("api/Customer/ElementGet/" + id.Value);
+                    textBoxFIO.Text = customer.CustomerFIO;
                     if (customer != null)
-
                     {
                         textBoxFIO.Text = customer.CustomerFIO;
                         textBoxMail.Text = customer.Mail;
@@ -90,6 +90,7 @@ namespace AbstracFlowertShopView1
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
     }

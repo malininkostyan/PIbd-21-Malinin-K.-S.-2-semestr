@@ -113,7 +113,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxFIO);
             this.Controls.Add(this.label1);
-            this.IsMdiContainer = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CustomerForm";
             this.Text = "  Покупатель";
             this.Load += new System.EventHandler(this.FormCustomer_Load);
