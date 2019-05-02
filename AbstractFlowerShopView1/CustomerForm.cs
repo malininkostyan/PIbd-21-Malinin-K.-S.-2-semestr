@@ -23,13 +23,17 @@ namespace AbstracFlowertShopView1
                 try
                 {
                     CustomerViewModel customer = APICustomer.GetRequest<CustomerViewModel>("api/Customer/ElementGet/" + id.Value);
-                    textBoxFIO.Text = customer.CustomerFIO;
-                    textBoxMail.Text = customer.Mail;
-                    dataGridView.DataSource = customer.InfoMessages;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[4].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
+                    if (customer != null)
+
+                    {
+                        textBoxFIO.Text = customer.CustomerFIO;
+                        textBoxMail.Text = customer.Mail;
+                        dataGridView.DataSource = customer.InfoMessages;
+                        dataGridView.Columns[0].Visible = false;
+                        dataGridView.Columns[1].Visible = false;
+                        dataGridView.Columns[4].AutoSizeMode =
+                        DataGridViewAutoSizeColumnMode.Fill;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +58,7 @@ namespace AbstracFlowertShopView1
             string mail = textBoxMail.Text;
             if (!string.IsNullOrEmpty(mail))
             {
-                if (!Regex.IsMatch(mail, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9az][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$"))
+                if (!Regex.IsMatch(mail, @"(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)"))
                 {
                     MessageBox.Show("Неверный формат для электронной почты", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -63,7 +67,7 @@ namespace AbstracFlowertShopView1
             }
             if (id.HasValue)
             {
-                APICustomer.PostRequest<CustomerBindingModel, bool>("api/Component/UpdateElement", new CustomerBindingModel
+                APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/UpdateElement", new CustomerBindingModel
                 {
                    Id = id.Value,
                    CustomerFIO = fio,
@@ -72,7 +76,7 @@ namespace AbstracFlowertShopView1
             }
             else
             {
-                APICustomer.PostRequest<CustomerBindingModel, bool>("api/Component/AddElement", new CustomerBindingModel
+                APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/AddElement", new CustomerBindingModel
                 {
                    CustomerFIO = fio,
                    Mail = mail

@@ -32,14 +32,6 @@ namespace AbstractFlowerShopView1
                     comboBoxBouquet.DataSource = listP;
                     comboBoxBouquet.SelectedItem = null;
                 }
-                List<ExecutorViewModel> listE = APICustomer.GetRequest<List<ExecutorViewModel>>("api/Executor/ListGet");
-                if (listE != null)
-                {
-                    comboBoxExecutor.DisplayMember = "ExecutorFIO";
-                    comboBoxExecutor.ValueMember = "Id";
-                    comboBoxExecutor.DataSource = listE;
-                    comboBoxExecutor.SelectedItem = null;
-                }
             }
             catch (Exception ex)
             {
@@ -93,19 +85,12 @@ namespace AbstractFlowerShopView1
                MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxExecutor.SelectedValue == null)
-            {
-                MessageBox.Show("Выберите сотрудника", "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-                return;
-            }
             try
             {
                APICustomer.PostRequest<BookingBindingModel, bool>("api/Main/CreateBooking", new BookingBindingModel
                {
                     CustomerId = Convert.ToInt32(comboBoxCustomer.SelectedValue),
                     BouquetId = Convert.ToInt32(comboBoxBouquet.SelectedValue),
-                    ExecutorId = Convert.ToInt32(comboBoxExecutor.SelectedValue),
                     Amount = Convert.ToInt32(textBoxCount.Text),
                     Total = Convert.ToInt32(textBoxTotal.Text)
                 });

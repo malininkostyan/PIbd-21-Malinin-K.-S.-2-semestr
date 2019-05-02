@@ -43,7 +43,8 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Total = rec.Total,
                 CustomerFIO = rec.Customer.CustomerFIO,
                 BouquetName = rec.Bouquet.BouquetName,
-                ExecutorFIO = rec.Executor.ExecutorFIO
+                ExecutorFIO = rec.Executor.ExecutorFIO,
+                ExecutorId = rec.ExecutorId
             })
             .ToList();
             return result;
