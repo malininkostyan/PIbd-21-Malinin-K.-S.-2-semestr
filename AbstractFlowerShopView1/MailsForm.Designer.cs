@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.customerBookingViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBookingViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -41,6 +44,10 @@
             this.dataGridView.Size = new System.Drawing.Size(776, 426);
             this.dataGridView.TabIndex = 0;
             // 
+            // customerBookingViewModelBindingSource
+            // 
+            this.customerBookingViewModelBindingSource.DataSource = typeof(AbstractFlowerShopServiceDAL1.ViewModel.CustomerBookingViewModel);
+            // 
             // MailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -49,7 +56,9 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "MailsForm";
             this.Text = "Письма";
+            this.Load += new System.EventHandler(this.FormMails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBookingViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -57,5 +66,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.BindingSource customerBookingViewModelBindingSource;
     }
 }

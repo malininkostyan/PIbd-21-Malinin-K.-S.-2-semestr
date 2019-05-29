@@ -10,7 +10,6 @@ using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using iTextSharp.text;
 
 namespace AbstractFlowerShopServiceImplementDataBase.Implementations
 {

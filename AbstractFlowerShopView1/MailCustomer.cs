@@ -1,14 +1,11 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AbstractFlowerShopView1
@@ -114,7 +111,7 @@ namespace AbstractFlowerShopView1
                      !string.IsNullOrEmpty(bookingSubjectMessage) &&
                     !string.IsNullOrEmpty(date))
                     {
-                        APICustomer.PostRequest<InfoMessageBindingModel, bool>("api/MessageInfo/AddElement", new InfoMessageBindingModel
+                        APICustomer.PostRequest<InfoMessageBindingModel, bool>("api/InfoMessage/AddElement", new InfoMessageBindingModel
                        {
                             MessageId = messageId,
                             FromMailAddress = from,

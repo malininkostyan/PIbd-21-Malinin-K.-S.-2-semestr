@@ -1,12 +1,6 @@
 ﻿using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AbstractFlowerShopView1
@@ -21,8 +15,7 @@ namespace AbstractFlowerShopView1
         {
             try
             {
-                List<InfoMessageViewModel> list =
-                APICustomer.GetRequest<List<InfoMessageViewModel>>("api/MessageInfo/GetList");
+                List<InfoMessageViewModel> list = APICustomer.GetRequest<List<InfoMessageViewModel>>("api/InfoMessage/ListGet");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;

@@ -1,10 +1,6 @@
 ﻿using AbstractFlowerShopServiceDAL1.BindingModel;
 using AbstractFlowerShopServiceDAL1.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace AbstractFlowerShopRestApi.Controllers
