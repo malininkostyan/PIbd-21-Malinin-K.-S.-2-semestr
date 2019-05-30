@@ -27,6 +27,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Id = rec.Id,
                 CustomerId = rec.CustomerId,
                 BouquetId = rec.BouquetId,
+                ExecutorId = rec.ExecutorId,
                 CreateDate = SqlFunctions.DateName("dd", rec.CreateDate) + " " +
                 SqlFunctions.DateName("mm", rec.CreateDate) + " " +
                 SqlFunctions.DateName("yyyy", rec.CreateDate),
@@ -60,9 +61,9 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Total = model.Total,
                 Status = BookingStatus.Принят
             };
-            context.SaveChanges();
             var customer = context.Customers.FirstOrDefault(x => x.Id == model.CustomerId);
             SendEmail(customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} создан успешно", booking.Id, booking.CreateDate.ToShortDateString()));
+            context.SaveChanges();
         }
         public void TakeBookingInWork(BookingBindingModel model)
         {
@@ -124,7 +125,6 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                     element.Status = BookingStatus.НедостаточноРесурсов;
                     context.SaveChanges();
                     transaction.Commit();
-
                     throw;
                 }
             }

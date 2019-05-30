@@ -9,7 +9,7 @@ namespace AbstractFlowerShopServiceDAL1.ViewModel
         [DataMember]
         public string MessageId { get; set; }
         [DataMember]
-        public string CustomerFIO { get; set; }
+        public string CustomerName { get; set; }
         [DataMember]
         public DateTime DeliveryDate { get; set; }
         [DataMember]

@@ -28,7 +28,7 @@ namespace AbstracFlowertShopView1
                     {
                         textBoxFIO.Text = customer.CustomerFIO;
                         textBoxMail.Text = customer.Mail;
-                        dataGridView.DataSource = customer.InfoMessages;
+                        dataGridView.DataSource = customer.Messages;
                         dataGridView.Columns[0].Visible = false;
                         dataGridView.Columns[1].Visible = false;
                         dataGridView.Columns[4].AutoSizeMode =

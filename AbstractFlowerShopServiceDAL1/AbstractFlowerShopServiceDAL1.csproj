@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributies\CustomInterfaceAttributies.cs" />
+    <Compile Include="Attributies\CustomMethodAttributies.cs" />
     <Compile Include="BindingModel\BookingBindingModel.cs" />
     <Compile Include="BindingModel\BouquetBindingModel.cs" />
     <Compile Include="BindingModel\BouquetElementBindingModel.cs" />
