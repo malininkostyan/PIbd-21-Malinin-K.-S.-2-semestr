@@ -25,7 +25,7 @@ namespace AbstractFlowerShopRestApi
         public static void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<DbContext, AbstractContextDb>(new
-          HierarchicalLifetimeManager());
+            HierarchicalLifetimeManager());
             container.RegisterType<ICustomerService, CustomerServiceDB>(new
             HierarchicalLifetimeManager());
             container.RegisterType<IElementService, ElementServiceDB>(new
@@ -41,7 +41,7 @@ namespace AbstractFlowerShopRestApi
             container.RegisterType<IExecutorService, ExecutorServiceDB>(new
             HierarchicalLifetimeManager());
             container.RegisterType<IInfoMessageService, InfoMessageServiceDB>(new
-           HierarchicalLifetimeManager());
+            HierarchicalLifetimeManager());
         }
     }
 }
