@@ -36,7 +36,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                     Id = element.Id,
                     CustomerFIO = element.CustomerFIO,
                     Mail = element.Mail,
-                    InfoMessages = context.InfoMessages
+                    Messages = context.InfoMessages
                     .Where(recM => recM.CustomerId == element.Id)
                     .Select(recM => new InfoMessageViewModel
                     {

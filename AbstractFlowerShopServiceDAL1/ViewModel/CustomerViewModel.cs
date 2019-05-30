@@ -13,6 +13,6 @@ namespace AbstractFlowerShopServiceDAL1.ViewModel
         [DataMember]
         public string CustomerFIO { get; set; }
         [DataMember]
-        public List<InfoMessageViewModel> InfoMessages { get; set; }
+        public List<InfoMessageViewModel> Messages { get; set; }
     }
 }

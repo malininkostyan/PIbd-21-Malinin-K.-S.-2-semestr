@@ -24,7 +24,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             .Select(rec => new InfoMessageViewModel
             {
                 MessageId = rec.MessageId,
-                CustomerFIO = rec.FromMailAddress,
+                CustomerName = rec.FromMailAddress,
                 DeliveryDate = rec.DeliveryDate,
                 Subject = rec.Subject,
                 Body = rec.Body
@@ -41,7 +41,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 return new InfoMessageViewModel
                 {
                     MessageId = element.MessageId,
-                    CustomerFIO = element.Customers.CustomerFIO,
+                    CustomerName = element.Customers.CustomerFIO,
                     DeliveryDate = element.DeliveryDate,
                     Subject = element.Subject,
                     Body = element.Body
