@@ -60,7 +60,6 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Total = model.Total,
                 Status = BookingStatus.Принят
             };
-            //context.Bookings.Add(booking);
             context.SaveChanges();
             var customer = context.Customers.FirstOrDefault(x => x.Id == model.CustomerId);
             SendEmail(customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} создан успешно", booking.Id, booking.CreateDate.ToShortDateString()));
