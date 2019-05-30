@@ -42,8 +42,8 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Total = rec.Total,
                 CustomerFIO = rec.Customer.CustomerFIO,
                 BouquetName = rec.Bouquet.BouquetName,
-                ExecutorFIO = rec.Executor.ExecutorFIO,
-                ExecutorId = rec.ExecutorId
+                ExecutorId = rec.ExecutorId,
+                ExecutorFIO = rec.Executor.ExecutorFIO
             })
             .ToList();
             return result;
@@ -112,6 +112,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                     }
                     element.ExecutorId = model.ExecutorId;
                     element.ImplementDate = DateTime.Now;
+                    element.ExecutorId = model.ExecutorId;
                     element.Status = BookingStatus.Выполняется;
                     context.SaveChanges();
                     SendEmail(element.Customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} передан в работу", element.Id, element.CreateDate.ToShortDateString()));
