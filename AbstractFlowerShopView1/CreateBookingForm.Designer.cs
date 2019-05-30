@@ -61,7 +61,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 101);
+            this.label3.Location = new System.Drawing.Point(12, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 17);
             this.label3.TabIndex = 3;
@@ -70,7 +70,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 67);
+            this.label4.Location = new System.Drawing.Point(12, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 17);
             this.label4.TabIndex = 2;
@@ -95,7 +95,7 @@
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(130, 67);
+            this.textBoxCount.Location = new System.Drawing.Point(129, 73);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(318, 22);
             this.textBoxCount.TabIndex = 6;
@@ -103,14 +103,14 @@
             // 
             // textBoxTotal
             // 
-            this.textBoxTotal.Location = new System.Drawing.Point(129, 101);
+            this.textBoxTotal.Location = new System.Drawing.Point(129, 103);
             this.textBoxTotal.Name = "textBoxTotal";
             this.textBoxTotal.Size = new System.Drawing.Size(318, 22);
             this.textBoxTotal.TabIndex = 7;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(350, 141);
+            this.buttonCancel.Location = new System.Drawing.Point(349, 131);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(98, 27);
             this.buttonCancel.TabIndex = 11;
@@ -120,7 +120,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(240, 141);
+            this.buttonSave.Location = new System.Drawing.Point(245, 131);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(98, 27);
             this.buttonSave.TabIndex = 10;
@@ -132,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 184);
+            this.ClientSize = new System.Drawing.Size(467, 170);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxTotal);
