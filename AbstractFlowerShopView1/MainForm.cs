@@ -146,5 +146,10 @@ namespace AbstractFlowerShopView1
             }
         }
 
+        private void письмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new MailsForm();
+            form.ShowDialog();
+        }
     }
 }

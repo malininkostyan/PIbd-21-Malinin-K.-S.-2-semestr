@@ -153,6 +153,13 @@
     <Compile Include="ExecutorsForm.Designer.cs">
       <DependentUpon>ExecutorsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MailCustomer.cs" />
+    <Compile Include="MailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MailsForm.Designer.cs">
+      <DependentUpon>MailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,6 +223,9 @@
     <EmbeddedResource Include="ExecutorForm.resx">
       <DependentUpon>ExecutorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MailsForm.resx">
+      <DependentUpon>MailsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +274,10 @@
       <Project>{15439c61-a4dc-4ba2-b5d8-e43bb79d0618}</Project>
       <Name>AbstractFlowerShopModel1</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AbstractFlowerShopRestApi\AbstractFlowerShopRestApi.csproj">
+      <Project>{46404930-8432-4c53-8dfc-61d2d429c8ae}</Project>
+      <Name>AbstractFlowerShopRestApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL1.csproj">
       <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
       <Name>AbstractFlowerShopServiceDAL1</Name>
@@ -291,6 +305,9 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

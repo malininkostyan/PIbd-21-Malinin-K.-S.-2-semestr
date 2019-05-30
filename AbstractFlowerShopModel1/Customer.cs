@@ -10,8 +10,13 @@ namespace AbstractFlowerShopModel1
 
         [Required]
         public string CustomerFIO { get; set; }
+        
+        public string Mail{ get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual List<Booking> Bookings { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual List<InfoMessage> InfoMessages { get; set; }
     }
 }

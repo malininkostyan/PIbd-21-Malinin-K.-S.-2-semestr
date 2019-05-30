@@ -2,6 +2,7 @@
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using AbstractFlowerShopView1;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AbstracFlowertShopView1
@@ -23,9 +24,24 @@ namespace AbstracFlowertShopView1
                 {
                     CustomerViewModel customer = APICustomer.GetRequest<CustomerViewModel>("api/Customer/ElementGet/" + id.Value);
                     textBoxFIO.Text = customer.CustomerFIO;
+                    if (customer != null)
+                    {
+                        textBoxFIO.Text = customer.CustomerFIO;
+                        textBoxMail.Text = customer.Mail;
+                        dataGridView.DataSource = customer.InfoMessages;
+                        dataGridView.Columns[0].Visible = false;
+                        dataGridView.Columns[1].Visible = false;
+                        dataGridView.Columns[4].AutoSizeMode =
+                        DataGridViewAutoSizeColumnMode.Fill;
+                    }
                 }
                 catch (Exception ex)
                 {
+                    while (ex.InnerException != null)
+                    {
+                        ex = ex.InnerException;
+                    }
+
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -38,32 +54,40 @@ namespace AbstracFlowertShopView1
                 MessageBox.Show("Заполните ФИО", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            try
+            string fio = textBoxFIO.Text;
+            string mail = textBoxMail.Text;
+            if (!string.IsNullOrEmpty(mail))
             {
-                if (id.HasValue)
+                if (!Regex.IsMatch(mail, @"(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)"))
                 {
-                    APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/UpdateElement", new CustomerBindingModel
-                    {
-                       Id = id.Value,
-                       CustomerFIO = textBoxFIO.Text
-                    });
+                    MessageBox.Show("Неверный формат для электронной почты", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
-                {
-                   APICustomer.PostRequest<CustomerBindingModel,bool>("api/Customer/AddElement", new CustomerBindingModel
-                   {
-                       CustomerFIO = textBoxFIO.Text
-                   });
-                }
-                MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.OK;
-                Close();
             }
-            catch (Exception ex)
+            if (id.HasValue)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/UpdateElement", new CustomerBindingModel
+                {
+                   Id = id.Value,
+                   CustomerFIO = fio,
+                   Mail = mail
+                });
             }
+            else
+            {
+                APICustomer.PostRequest<CustomerBindingModel, bool>("api/Customer/AddElement", new CustomerBindingModel
+                {
+                   CustomerFIO = fio,
+                   Mail = mail
+                });
+            }
+            MessageBox.Show("Сохранение прошло успешно", "Сообщение",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult = DialogResult.OK;
+            Close();
         }
+
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

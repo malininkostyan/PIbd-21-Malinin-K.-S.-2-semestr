@@ -42,6 +42,7 @@ namespace AbstractFlowerShopServiceImplementList1.Implementations
                 Id = maxId + 1,
                 CustomerId = model.CustomerId,
                 BouquetId = model.BouquetId,
+                ExecutorId = model.ExecutorId,
                 CreateDate = DateTime.Now,
                 Amount = model.Amount,
                 Total = model.Total,

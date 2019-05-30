@@ -4,9 +4,12 @@ using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 
 namespace AbstractFlowerShopServiceImplementDataBase.Implementations
 {
@@ -47,7 +50,7 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
         }
         public void CreateBooking(BookingBindingModel model)
         {
-            context.Bookings.Add(new Booking
+            var booking = new Booking
             {
                 CustomerId = model.CustomerId,
                 BouquetId = model.BouquetId,
@@ -56,8 +59,10 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                 Amount = model.Amount,
                 Total = model.Total,
                 Status = BookingStatus.Принят
-            });
+            };
             context.SaveChanges();
+            var customer = context.Customers.FirstOrDefault(x => x.Id == model.CustomerId);
+            SendEmail(customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} создан успешно", booking.Id, booking.CreateDate.ToShortDateString()));
         }
         public void TakeBookingInWork(BookingBindingModel model)
         {
@@ -70,7 +75,8 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                     {
                         throw new Exception("Элемент не найден");
                     }
-                    if (element.Status != BookingStatus.Принят)
+                    if (element.Status != BookingStatus.Принят && element.Status != BookingStatus.НедостаточноРесурсов)
+
                     {
                         throw new Exception("Заказ не в статусе \"Принят\"");
                     }
@@ -103,15 +109,22 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
                             throw new Exception("Не достаточно компонента " + bouquetElement.Element.ElementName + " требуется " + bouquetElement.Amount + ", не  хватает " + countOnStorages);
                         }
                     }
+                    element.ExecutorId = model.ExecutorId;
                     element.ImplementDate = DateTime.Now;
                     element.ExecutorId = model.ExecutorId;
                     element.Status = BookingStatus.Выполняется;
                     context.SaveChanges();
+                    SendEmail(element.Customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} передан в работу", element.Id, element.CreateDate.ToShortDateString()));
                     transaction.Commit();
                 }
                 catch (Exception)
                 {
+                    Booking element = context.Bookings.FirstOrDefault(rec => rec.Id == model.Id);
                     transaction.Rollback();
+                    element.Status = BookingStatus.НедостаточноРесурсов;
+                    context.SaveChanges();
+                    transaction.Commit();
+
                     throw;
                 }
             }
@@ -129,7 +142,10 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             }
             element.Status = BookingStatus.Готов;
             context.SaveChanges();
+            SendEmail(element.Customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} передан на оплату", element.Id, element.CreateDate.ToShortDateString()));
         }
+
+    
         public void PayBooking(BookingBindingModel model)
         {
             Booking element = context.Bookings.FirstOrDefault(rec => rec.Id == model.Id);
@@ -143,7 +159,9 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             }
             element.Status = BookingStatus.Оплачен;
             context.SaveChanges();
+            SendEmail(element.Customer.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} оплачен успешно", element.Id, element.CreateDate.ToShortDateString()));
         }
+    
         public void PutElementOnStorage(StorageElementBindingModel model)
         {
             StorageElement element = context.StorageElements.FirstOrDefault(rec =>
@@ -173,6 +191,38 @@ namespace AbstractFlowerShopServiceImplementDataBase.Implementations
             })
             .ToList();
             return result;
+        }
+        private void SendEmail(string mailAddress, string subject, string text)
+        {
+            MailMessage objMailMessage = new MailMessage();
+            SmtpClient objSmtpCustomer = null;
+            try
+            {
+                objMailMessage.From = new
+                MailAddress(ConfigurationManager.AppSettings["MailLogin"]);
+                objMailMessage.To.Add(new MailAddress(mailAddress));
+                objMailMessage.Subject = subject;
+                objMailMessage.Body = text;
+                objMailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
+                objMailMessage.BodyEncoding = System.Text.Encoding.UTF8;
+                objSmtpCustomer = new SmtpClient("smtp.gmail.com", 587);
+                objSmtpCustomer.UseDefaultCredentials = false;
+                objSmtpCustomer.EnableSsl = true;
+                objSmtpCustomer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                objSmtpCustomer.Credentials = new
+                NetworkCredential(ConfigurationManager.AppSettings["MailLogin"],
+                ConfigurationManager.AppSettings["MailPassword"]);
+                objSmtpCustomer.Send(objMailMessage);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                objMailMessage = null;
+                objSmtpCustomer = null;
+            }
         }
     }
 }

@@ -12,13 +12,13 @@ namespace AbstractFlowerShopRestApi
     {
         #region Unity Container
         private static Lazy<IUnityContainer> container =
-        new Lazy<IUnityContainer>(() =>
-        {
-            var container = new UnityContainer();
-            RegisterTypes(container);
-            return container;
-        });
-       
+          new Lazy<IUnityContainer>(() =>
+          {
+              var container = new UnityContainer();
+              RegisterTypes(container);
+              return container;
+          });
+
         public static IUnityContainer Container => container.Value;
         #endregion
 
@@ -39,6 +39,8 @@ namespace AbstractFlowerShopRestApi
             container.RegisterType<ILogService, LogServiceDB>(new
             HierarchicalLifetimeManager());
             container.RegisterType<IExecutorService, ExecutorServiceDB>(new
+            HierarchicalLifetimeManager());
+            container.RegisterType<IInfoMessageService, InfoMessageServiceDB>(new
             HierarchicalLifetimeManager());
         }
     }

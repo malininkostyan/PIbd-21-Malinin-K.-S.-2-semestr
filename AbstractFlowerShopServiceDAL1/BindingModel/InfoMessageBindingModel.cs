@@ -1,0 +1,20 @@
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace AbstractFlowerShopServiceDAL1.BindingModel
+{
+    [DataContract]
+    public class InfoMessageBindingModel
+    {
+        [DataMember]
+        public string MessageId { get; set; }
+        [DataMember]
+        public string FromMailAddress { get; set; }
+        [DataMember]
+        public string Subject { get; set; }
+        [DataMember]
+        public string Body { get; set; }
+        [DataMember]
+        public DateTime DeliveryDate { get; set; }
+    }
+}
