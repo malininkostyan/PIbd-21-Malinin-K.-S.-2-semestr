@@ -120,12 +120,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddElementStorageController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\BouquetController.cs" />
     <Compile Include="Controllers\BouquetsController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ElementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +181,11 @@
     <Content Include="Views\Bouquet\AddElement.cshtml" />
     <Content Include="Views\Bouquet\Index.cshtml" />
     <Content Include="Views\Bouquets\Index.cshtml" />
+    <Content Include="Views\AddElementStorage\Index.cshtml" />
+    <Content Include="Views\Storage\Create.cshtml" />
+    <Content Include="Views\Storage\Edit.cshtml" />
+    <Content Include="Views\Storage\List.cshtml" />
+    <Content Include="Views\Storage\More.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

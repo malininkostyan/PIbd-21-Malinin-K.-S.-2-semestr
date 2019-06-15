@@ -11,5 +11,6 @@ namespace AbstractFlowerShopServiceDAL.Interfaces
         void TakeBookingInWork(BookingBindingModel model);
         void FinishBooking(BookingBindingModel model);
         void PayBooking(BookingBindingModel model);
+        void PutElementOnStorage(StorageElementBindingModel model);
     }
 }
