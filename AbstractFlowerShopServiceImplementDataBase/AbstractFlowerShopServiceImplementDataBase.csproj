@@ -64,6 +64,10 @@
     <Compile Include="Migrations\201903291915239_ThirdMigration.Designer.cs">
       <DependentUpon>201903291915239_ThirdMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906150554381_New.cs" />
+    <Compile Include="Migrations\201906150554381_New.Designer.cs">
+      <DependentUpon>201906150554381_New.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,16 +76,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel1.csproj">
-      <Project>{15439c61-a4dc-4ba2-b5d8-e43bb79d0618}</Project>
-      <Name>AbstractFlowerShopModel1</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL1.csproj">
-      <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
-      <Name>AbstractFlowerShopServiceDAL1</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903160845132_FirstMigration.resx">
@@ -93,6 +87,19 @@
     <EmbeddedResource Include="Migrations\201903291915239_ThirdMigration.resx">
       <DependentUpon>201903291915239_ThirdMigration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906150554381_New.resx">
+      <DependentUpon>201906150554381_New.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel.csproj">
+      <Project>{15439C61-A4DC-4BA2-B5D8-E43BB79D0618}</Project>
+      <Name>AbstractFlowerShopModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL.csproj">
+      <Project>{EE601688-07EA-4F9A-BEBE-7B097511DDF8}</Project>
+      <Name>AbstractFlowerShopServiceDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

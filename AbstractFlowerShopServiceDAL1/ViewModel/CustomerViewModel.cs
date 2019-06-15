@@ -1,4 +1,4 @@
-﻿namespace AbstractFlowerShopServiceDAL1.ViewModel
+﻿namespace AbstractFlowerShopServiceDAL.ViewModel
 {
     public class CustomerViewModel
     {

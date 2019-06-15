@@ -1,5 +1,5 @@
-﻿using AbstractFlowerShopServiceDAL1.Interfaces;
-using AbstractFlowerShopServiceDAL1.ViewModel;
+﻿using AbstractFlowerShopServiceDAL.Interfaces;
+using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AbstractFlowerShopServiceDAL1.BindingModel
+namespace AbstractFlowerShopServiceDAL.BindingModel
 {
     public class BouquetBindingModel
     {

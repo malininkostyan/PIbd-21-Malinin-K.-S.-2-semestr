@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopView1", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceImplementDataBase", "AbstractFlowerShopServiceImplementDataBase\AbstractFlowerShopServiceImplementDataBase.csproj", "{E700F092-3B68-4BC0-AF76-C8563A2D8E84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopModel", "AbstractFlowerShopModel1\AbstractFlowerShopModel.csproj", "{15439C61-A4DC-4BA2-B5D8-E43BB79D0618}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceDAL", "AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL.csproj", "{EE601688-07EA-4F9A-BEBE-7B097511DDF8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationFlowerShop", "WebApplicationFlowerShop\WebApplicationFlowerShop.csproj", "{CE3D4638-041D-4AE7-ADB2-64382712E123}"
 EndProject
 Global

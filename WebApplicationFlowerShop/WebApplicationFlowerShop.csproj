@@ -210,8 +210,12 @@
       <Name>AbstractFlowerShopModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL.csproj">
-      <Project>{EE601688-07EA-4F9A-BEBE-7B097511DDF8}</Project>
+      <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
       <Name>AbstractFlowerShopServiceDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AbstractFlowerShopServiceImplementDataBase\AbstractFlowerShopServiceImplementDataBase.csproj">
+      <Project>{e700f092-3b68-4bc0-af76-c8563a2d8e84}</Project>
+      <Name>AbstractFlowerShopServiceImplementDataBase</Name>
     </ProjectReference>
     <ProjectReference Include="..\AbstractFlowerShopServiceImplementList1\AbstractFlowerShopServiceImplementList1.csproj">
       <Project>{62FCC0B2-2C45-4EFB-BB93-CF0D0A0DB6E1}</Project>

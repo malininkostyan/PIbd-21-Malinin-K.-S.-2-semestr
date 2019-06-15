@@ -58,6 +58,10 @@
     <Compile Include="SingleDataList.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel.csproj">
       <Project>{15439c61-a4dc-4ba2-b5d8-e43bb79d0618}</Project>
       <Name>AbstractFlowerShopModel</Name>
@@ -66,10 +70,6 @@
       <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
       <Name>AbstractFlowerShopServiceDAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

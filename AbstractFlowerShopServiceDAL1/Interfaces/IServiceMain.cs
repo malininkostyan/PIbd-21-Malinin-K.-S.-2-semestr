@@ -1,8 +1,8 @@
-﻿using AbstractFlowerShopServiceDAL1.ViewModel;
-using AbstractFlowerShopServiceDAL1.BindingModel;
+﻿using AbstractFlowerShopServiceDAL.ViewModel;
+using AbstractFlowerShopServiceDAL.BindingModel;
 using System.Collections.Generic;
 
-namespace AbstractFlowerShopServiceDAL1.Interfaces
+namespace AbstractFlowerShopServiceDAL.Interfaces
 {
     public interface IServiceMain
     {
