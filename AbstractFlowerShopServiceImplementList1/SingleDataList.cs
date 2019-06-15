@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AbstractFlowerShopModel;
+using AbstractFlowerShopModel1;
 
 namespace AbstractFlowerShopServiceImplementList
 {
@@ -11,6 +12,8 @@ namespace AbstractFlowerShopServiceImplementList
         public List<Booking> Bookings { get; set; }
         public List<Bouquet> Bouquets { get; set; }
         public List<BouquetElement> BouquetElements { get; set; }
+        public List<Storage> Storages { get; set; }
+        public List<StorageElement> StorageElements { get; set; }
         private SingleDataList()
         {
             Customers = new List<Customer>();
@@ -18,6 +21,8 @@ namespace AbstractFlowerShopServiceImplementList
             Bookings = new List<Booking>();
             Bouquets = new List<Bouquet>();
             BouquetElements = new List<BouquetElement>();
+            Storages = new List<Storage>();
+            StorageElements = new List<StorageElement>();
         }
         public static SingleDataList GetInstance()
         {

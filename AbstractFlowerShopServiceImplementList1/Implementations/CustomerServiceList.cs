@@ -4,6 +4,7 @@ using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbstractFlowerShopServiceImplementList.Implementations
 {
@@ -16,84 +17,65 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
         }
         public List<CustomerViewModel> ListGet()
         {
-            List<CustomerViewModel> result = new List<CustomerViewModel>();
-            for (int i = 0; i < origin.Customers.Count; ++i)
+            List<CustomerViewModel> result = origin.Customers.Select(rec => new CustomerViewModel
             {
-                result.Add(new CustomerViewModel
-                {
-                    Id = origin.Customers[i].Id,
-                    CustomerFIO = origin.Customers[i].CustomerFIO
-                });
-            }
-        return result;
+                Id = rec.Id,
+                CustomerFIO = rec.CustomerFIO
+            }).ToList();
+            return result;
         }
         public CustomerViewModel ElementGet(int id)
         {
-            for (int i = 0; i < origin.Customers.Count; ++i)
+            Customer component = origin.Customers.FirstOrDefault(rec => rec.Id == id);
+            if (component != null)
             {
-                if (origin.Customers[i].Id == id)
+                return new CustomerViewModel
                 {
-                    return new CustomerViewModel
-                    {
-                        Id = origin.Customers[i].Id,
-                        CustomerFIO = origin.Customers[i].CustomerFIO
-                    };
-                }
+                    Id = component.Id,
+                    CustomerFIO = component.CustomerFIO
+                };
             }
             throw new Exception("Элемент не найден");
         }
         public void AddElement(CustomerBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < origin.Customers.Count; ++i)
+            Customer component = origin.Customers.FirstOrDefault(rec => rec.CustomerFIO == model.CustomerFIO);
+            if (component != null)
             {
-                if (origin.Customers[i].Id > maxId)
-                {
-                    maxId = origin.Customers[i].Id;
-                }
-                if (origin.Customers[i].CustomerFIO == model.CustomerFIO)
-                {
-                    throw new Exception("Уже есть клиент с таким ФИО");
-                }
+                throw new Exception("Уже есть покупатель с таким ФИО");
             }
+            int maxId = origin.Customers.Count > 0 ? origin.Customers.Max(rec => rec.Id) : 0;
             origin.Customers.Add(new Customer
             {
                 Id = maxId + 1,
                 CustomerFIO = model.CustomerFIO
-            });
+            });
         }
         public void UpdateElement(CustomerBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < origin.Customers.Count; ++i)
+            Customer component = origin.Customers.FirstOrDefault(rec => rec.CustomerFIO == model.CustomerFIO && rec.Id != model.Id);
+            if (component != null)
             {
-                if (origin.Customers[i].Id == model.Id)
-                {
-                    index = i;
-                }
-                if (origin.Customers[i].CustomerFIO == model.CustomerFIO &&
-                origin.Customers[i].Id != model.Id)
-                {
-                    throw new Exception("Уже есть клиент с таким ФИО");
-                }
+                throw new Exception("Уже есть клиент с таким ФИО");
             }
-            if (index == -1)
+            component = origin.Customers.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            origin.Customers[index].CustomerFIO = model.CustomerFIO;
+            component.CustomerFIO = model.CustomerFIO;
         }
         public void DeleteElement(int id)
         {
-            for (int i = 0; i < origin.Customers.Count; ++i)
-        {
-                if (origin.Customers[i].Id == id)
-                {
-                    origin.Customers.RemoveAt(i);
-                    return;
-                }
+            Customer component = origin.Customers.FirstOrDefault(rec => rec.Id == id);
+            if (component != null)
+            {
+                origin.Customers.Remove(component);
             }
-            throw new Exception("Элемент не найден");
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
         }
     }
 }
