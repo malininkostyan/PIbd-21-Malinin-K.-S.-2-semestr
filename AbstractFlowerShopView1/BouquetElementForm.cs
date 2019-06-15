@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractFlowerShopView
+namespace AbstractFlowerShopView1
 {
     public partial class FormBouquetElement : Form
     {

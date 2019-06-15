@@ -1,13 +1,12 @@
 ﻿using AbstractFlowerShopServiceDAL.BindingModel;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
-using AbstractFlowerShopView1;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractFlowerShopView
+namespace AbstractFlowerShopView1
 {
     public partial class MainForm : Form
     {

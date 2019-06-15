@@ -1,12 +1,13 @@
-﻿using System;
+﻿using AbstractFlowerShopServiceDAL.Interfaces;
+using AbstractFlowerShopServiceImplementDataBase;
+using AbstractFlowerShopServiceImplementDataBase.Implementations;
+using System;
+using System.Data.Entity;
 using System.Windows.Forms;
-using AbstractFlowerShopServiceImplementList.Implementations;
-using AbstractFlowerShopServiceDAL.Interfaces;
 using Unity;
 using Unity.Lifetime;
-using AbstractFlowerShopServiceImplementList1.Implementations;
 
-namespace AbstractFlowerShopView
+namespace AbstractFlowerShopView1
 {
     static class Program
     {
@@ -16,23 +17,24 @@ namespace AbstractFlowerShopView
             var container = BuildUnityContainer();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(container.Resolve <MainForm>());
+            Application.Run(container.Resolve<MainForm>());
         }
         public static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<ICustomerService, CustomerServiceList>(new
+            currentContainer.RegisterType<DbContext, AbstractContextDb>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IElementService, ElementServiceList>(new
+            currentContainer.RegisterType<ICustomerService, CustomerServiceDB>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IBouquetService, BouquetServiceList>(new
+            currentContainer.RegisterType<IElementService, ElementServiceDB>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IServiceMain, ServiceMainList>(new
+            currentContainer.RegisterType<IBouquetService, BouquetServiceDB>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IStorageService, StorageServiceList>(new
+            currentContainer.RegisterType<IStorageService, StorageServiceDB>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IServiceMain, ServiceMainDB>(new
             HierarchicalLifetimeManager());
             return currentContainer;
         }
-
     }
 }

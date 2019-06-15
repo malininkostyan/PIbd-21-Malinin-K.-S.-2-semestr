@@ -1,4 +1,4 @@
-﻿using AbstractFlowerShopModel;
+﻿using AbstractFlowerShopModel1;
 using AbstractFlowerShopServiceDAL.BindingModel;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AbstractFlowerShopServiceImplementList.Implementations
+namespace AbstractFlowerShopServiceImplementList1.Implementations
 {
     public class ElementServiceList : IElementService
     {

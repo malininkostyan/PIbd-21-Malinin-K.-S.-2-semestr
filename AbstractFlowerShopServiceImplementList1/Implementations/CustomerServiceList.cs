@@ -1,4 +1,4 @@
-﻿using AbstractFlowerShopModel;
+﻿using AbstractFlowerShopModel1;
 using AbstractFlowerShopServiceDAL.BindingModel;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AbstractFlowerShopServiceImplementList.Implementations
+namespace AbstractFlowerShopServiceImplementList1.Implementations
 {
     public class CustomerServiceList : ICustomerService
     {
@@ -49,7 +49,8 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
             {
                 Id = maxId + 1,
                 CustomerFIO = model.CustomerFIO
-            });
+            });
+
         }
         public void UpdateElement(CustomerBindingModel model)
         {
@@ -63,7 +64,8 @@ namespace AbstractFlowerShopServiceImplementList.Implementations
             {
                 throw new Exception("Элемент не найден");
             }
-            component.CustomerFIO = model.CustomerFIO;
+            component.CustomerFIO = model.CustomerFIO;
+
         }
         public void DeleteElement(int id)
         {

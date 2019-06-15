@@ -1,4 +1,4 @@
-﻿using AbstracFlowertShopView;
+﻿using AbstracFlowertShopView1;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractFlowerShopView
+namespace AbstractFlowerShopView1
 {
     public partial class CustomersForm : Form
     {

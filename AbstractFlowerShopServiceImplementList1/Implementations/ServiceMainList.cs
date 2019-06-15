@@ -1,13 +1,12 @@
-﻿using AbstractFlowerShopModel;
-using AbstractFlowerShopModel1;
-using AbstractFlowerShopServiceDAL.BindingModel;
+﻿using AbstractFlowerShopModel1;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
+using AbstractFlowerShopServiceDAL.BindingModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AbstractFlowerShopServiceImplementList.Implementations
+namespace AbstractFlowerShopServiceImplementList1.Implementations
 {
     public class ServiceMainList : IServiceMain
     {

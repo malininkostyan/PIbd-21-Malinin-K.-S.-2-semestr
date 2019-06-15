@@ -5,7 +5,7 @@ using System;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstracFlowertShopView
+namespace AbstracFlowertShopView1
 {
     public partial class CustomerForm : Form
     {
