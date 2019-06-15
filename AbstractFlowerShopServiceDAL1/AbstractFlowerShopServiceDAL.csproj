@@ -68,9 +68,9 @@
     <Compile Include="ViewModel\ElementViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel1.csproj">
+    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel.csproj">
       <Project>{15439c61-a4dc-4ba2-b5d8-e43bb79d0618}</Project>
-      <Name>AbstractFlowerShopModel1</Name>
+      <Name>AbstractFlowerShopModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

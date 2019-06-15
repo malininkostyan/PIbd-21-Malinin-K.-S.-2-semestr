@@ -56,13 +56,13 @@
     <Compile Include="SingleDataList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel1.csproj">
+    <ProjectReference Include="..\AbstractFlowerShopModel1\AbstractFlowerShopModel.csproj">
       <Project>{15439c61-a4dc-4ba2-b5d8-e43bb79d0618}</Project>
-      <Name>AbstractFlowerShopModel1</Name>
+      <Name>AbstractFlowerShopModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL1.csproj">
+    <ProjectReference Include="..\AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL.csproj">
       <Project>{ee601688-07ea-4f9a-bebe-7b097511ddf8}</Project>
-      <Name>AbstractFlowerShopServiceDAL1</Name>
+      <Name>AbstractFlowerShopServiceDAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
