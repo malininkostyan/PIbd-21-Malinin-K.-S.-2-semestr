@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("AbstractFlowerShop")]
+[assembly: AssemblyTitle("AbstractFlowerShopServiceImplementDataBase")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AbstractFlowerShop")]
+[assembly: AssemblyProduct("AbstractFlowerShopServiceImplementDataBase")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("5f458fb2-7f32-475f-8a8a-e6021c0d574b")]
+[assembly: Guid("e700f092-3b68-4bc0-af76-c8563a2d8e84")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

@@ -1,4 +1,4 @@
-﻿namespace AbstracFlowertShopView
+﻿namespace AbstracFlowertShopView1
 {
     partial class CustomerForm
     {

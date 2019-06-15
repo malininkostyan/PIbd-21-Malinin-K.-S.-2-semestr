@@ -1,11 +1,11 @@
-﻿using AbstractFlowerShopServiceDAL.BindingModel;
-using AbstractFlowerShopServiceDAL.Interfaces;
-using AbstractFlowerShopServiceDAL.ViewModel;
+﻿using AbstractFlowerShopServiceDAL1.BindingModel;
+using AbstractFlowerShopServiceDAL1.Interfaces;
+using AbstractFlowerShopServiceDAL1.ViewModel;
 using System;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstracFlowertShopView
+namespace AbstracFlowertShopView1
 {
     public partial class CustomerForm : Form
     {

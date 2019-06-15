@@ -1,4 +1,4 @@
-﻿namespace AbstractFlowerShopView
+﻿namespace AbstractFlowerShopView1
 {
     partial class MainForm
     {

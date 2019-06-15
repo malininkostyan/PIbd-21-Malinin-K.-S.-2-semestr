@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AbstractFlowerShopModel
+namespace AbstractFlowerShopModel1
 {
     public class Booking
     {
@@ -12,5 +12,7 @@ namespace AbstractFlowerShopModel
         public BookingStatus Status { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? ImplementDate { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Bouquet Bouquet { get; set; }
     }
 }
