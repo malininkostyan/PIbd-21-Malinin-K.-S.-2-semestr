@@ -1,6 +1,5 @@
 ﻿using AbstractFlowerShopServiceDAL.BindingModel;
 using AbstractFlowerShopServiceDAL.ViewModel;
-using AbstractFlowerShopServiceDAL1.BindingModel;
 using System.Collections.Generic;
 
 namespace AbstractFlowerShopServiceDAL.Interfaces

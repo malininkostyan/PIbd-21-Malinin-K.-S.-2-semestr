@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
-using AbstractFlowerShopServiceDAL1.Interfaces;
 using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceDAL.ViewModel;
-using AbstractFlowerShopServiceDAL1.ViewModel;
-using AbstractFlowerShopServiceDAL1.BindingModel;
+using AbstractFlowerShopServiceDAL.BindingModel;
 
 namespace AbstractFlowerShopView1
 {

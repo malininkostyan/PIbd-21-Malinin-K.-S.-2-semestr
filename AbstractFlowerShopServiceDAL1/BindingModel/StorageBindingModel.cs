@@ -1,4 +1,4 @@
-﻿namespace AbstractFlowerShopServiceDAL1.BindingModel
+﻿namespace AbstractFlowerShopServiceDAL.BindingModel
 {
     public class StorageBindingModel
     {

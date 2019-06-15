@@ -1,5 +1,6 @@
 ﻿using AbstractFlowerShopServiceDAL.Interfaces;
 using AbstractFlowerShopServiceImplementList.Implementations;
+using AbstractFlowerShopServiceImplementList1.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace WebApplicationFlowerShop
         public static IElementService ElementService { get; } = new ElementServiceList();
         public static IBouquetService BouquetService { get; } = new BouquetServiceList();
         public static IServiceMain MainService { get; } = new ServiceMainList();
+        public static IStorageService StorageService { get; } = new StorageServiceList();
     }
 }

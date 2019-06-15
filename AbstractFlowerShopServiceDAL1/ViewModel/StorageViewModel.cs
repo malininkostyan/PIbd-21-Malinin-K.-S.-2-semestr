@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace AbstractFlowerShopServiceDAL1.ViewModel
+namespace AbstractFlowerShopServiceDAL.ViewModel
 {
     public class StorageViewModel
     {
@@ -9,5 +9,6 @@ namespace AbstractFlowerShopServiceDAL1.ViewModel
         [DisplayName("Название склада")]
         public string StorageName { get; set; }
         public List<StorageElementViewModel> StorageElements { get; set; }
-    }
+    }
+
 }

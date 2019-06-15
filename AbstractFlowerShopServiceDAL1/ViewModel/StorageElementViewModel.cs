@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace AbstractFlowerShopServiceDAL1.ViewModel
+namespace AbstractFlowerShopServiceDAL.ViewModel
 {
     public class StorageElementViewModel
     {
@@ -11,5 +11,6 @@ namespace AbstractFlowerShopServiceDAL1.ViewModel
         public string ElementName { get; set; } 
         [DisplayName("Количество")]
         public int Amount { get; set; }
-    }
+    }
+
 }

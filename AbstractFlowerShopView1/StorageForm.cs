@@ -1,6 +1,6 @@
-﻿using AbstractFlowerShopServiceDAL1.BindingModel;
-using AbstractFlowerShopServiceDAL1.Interfaces;
-using AbstractFlowerShopServiceDAL1.ViewModel;
+﻿using AbstractFlowerShopServiceDAL.BindingModel;
+using AbstractFlowerShopServiceDAL.Interfaces;
+using AbstractFlowerShopServiceDAL.ViewModel;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -78,7 +78,8 @@ namespace AbstractFlowerShopView1
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
-            }
+            }
+
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {

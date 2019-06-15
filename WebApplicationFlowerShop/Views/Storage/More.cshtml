@@ -1,0 +1,32 @@
+﻿@model AbstractFlowerShopServiceDAL.ViewModel.StorageViewModel
+@{
+    ViewBag.Title = "More";
+}
+<h2>More</h2>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                <label>Элемент</label>
+            </th>
+            <th>
+                <label>Количество</label>
+            </th>
+        </tr>
+        @foreach (var item in Model.StorageElements)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "List")
+</p>
