@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopModel1", "AbstractFlowerShopModel1\AbstractFlowerShopModel1.csproj", "{15439C61-A4DC-4BA2-B5D8-E43BB79D0618}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopModel", "AbstractFlowerShopModel1\AbstractFlowerShopModel.csproj", "{15439C61-A4DC-4BA2-B5D8-E43BB79D0618}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceDAL1", "AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL1.csproj", "{EE601688-07EA-4F9A-BEBE-7B097511DDF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceDAL", "AbstractFlowerShopServiceDAL1\AbstractFlowerShopServiceDAL.csproj", "{EE601688-07EA-4F9A-BEBE-7B097511DDF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopServiceImplementList1", "AbstractFlowerShopServiceImplementList1\AbstractFlowerShopServiceImplementList1.csproj", "{62FCC0B2-2C45-4EFB-BB93-CF0D0A0DB6E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFlowerShopView1", "AbstractFlowerShopView1\AbstractFlowerShopView1.csproj", "{DBEB40F8-DBFC-48C0-ABBE-73CC3FDCCFF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationFlowerShop", "WebApplicationFlowerShop\WebApplicationFlowerShop.csproj", "{CE3D4638-041D-4AE7-ADB2-64382712E123}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DBEB40F8-DBFC-48C0-ABBE-73CC3FDCCFF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBEB40F8-DBFC-48C0-ABBE-73CC3FDCCFF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBEB40F8-DBFC-48C0-ABBE-73CC3FDCCFF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3D4638-041D-4AE7-ADB2-64382712E123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3D4638-041D-4AE7-ADB2-64382712E123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3D4638-041D-4AE7-ADB2-64382712E123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3D4638-041D-4AE7-ADB2-64382712E123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
